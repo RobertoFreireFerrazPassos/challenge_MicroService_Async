@@ -1,0 +1,41 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/apps",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiappshop",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/apps",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "Apps"
+    },
+    {
+      "DownstreamPathTemplate": "/apps/purchase",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiappshop",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/purchase",
+      "UpstreamHttpMethod": [ "Post" ],
+      "Key": "PurchaseApp"
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "PurchaseApp"
+      ],
+      "UpstreamPathTemplate": "AggregatedPurchaseApp",
+      "Aggregator": "AggregatedPurchaseAppAggregator"
+    },
+  ],
+  "GlobalConfiguration": {
+  }
+}
