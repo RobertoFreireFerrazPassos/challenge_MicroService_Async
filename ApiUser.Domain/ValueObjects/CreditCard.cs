@@ -1,6 +1,6 @@
-﻿namespace ApiUser.Models
+﻿namespace ApiUser.Domain.Entities
 {
-    public class CreditCardModel
+    public class CreditCard
     {
         public string Name { get; set; }
         public string Number { get; set; }
