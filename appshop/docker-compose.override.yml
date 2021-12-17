@@ -11,13 +11,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "9002:80"
+      - "9002:80" 
+    depends_on:
+    - mongodbcontainer
 
-  sql-server-db:
-    container_name: sql-server-db
-    image: mcr.microsoft.com/mssql/server:2017-latest
+  mongodbcontainer:
+    image: mongo    
     ports:
-      - "1433:1433"
-    environment:
-      SA_PASSWORD: "123_change_this_password"
-      ACCEPT_EULA: "Y"
+      - 27017:27017

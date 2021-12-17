@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MongoDB.Bson;
 
 namespace ApiAppShop.Models
 {
     public class AppModel
     {
-        public Guid Id { get; set; }
+        public ObjectId Id { get; set; }
         public string Name { get; set; }
     }
 }

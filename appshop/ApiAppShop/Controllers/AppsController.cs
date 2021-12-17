@@ -1,4 +1,6 @@
 ﻿using ApiAppShop.Models;
+using ApiAppShop.Repository;
+using ApiUser.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,24 @@ namespace ApiAppShop.Controllers
     [Route("[controller]")]
     public class AppsController : ControllerBase
     {
-        private static readonly string[] Apps = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private Context _context;
 
-        public AppsController()
+        public AppsController(Context context)
         {
+            _context = context;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {            
-            return Apps.ToList();
+        [HttpGet("setapp")]
+        public IActionResult Set()
+        {
+            _context.SetItem(new UserModel());
+            return Ok();
+        }
+
+        [HttpPost("getapp")]
+        public IActionResult Get(string id)
+        {
+            return Ok(_context.GetItems<UserModel>(id));
         }
 
         [HttpPost("purchase")]
