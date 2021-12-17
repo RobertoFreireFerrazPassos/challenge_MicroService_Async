@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/apps/getapp",
+      "DownstreamPathTemplate": "/apps/getapp/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -21,7 +21,19 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/get",
+      "UpstreamPathTemplate": "/get/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/apps/purchase",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiappshop",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/purchase",
       "UpstreamHttpMethod": [ "Post" ]
     }
   ],

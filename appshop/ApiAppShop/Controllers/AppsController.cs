@@ -12,6 +12,7 @@ namespace ApiAppShop.Controllers
     public class AppsController : ControllerBase
     {
         private Context _context;
+        private readonly string table = "Apps";
 
         public AppsController(Context context)
         {
@@ -21,14 +22,20 @@ namespace ApiAppShop.Controllers
         [HttpGet("setapp")]
         public IActionResult Set()
         {
-            _context.SetItem(new UserModel());
+            _context.SetItem(new UserModel(),table);
             return Ok();
         }
 
-        [HttpPost("getapp")]
+        [HttpGet("getapp/{id}")]
         public IActionResult Get(string id)
         {
-            return Ok(_context.GetItems<UserModel>(id));
+            return Ok(_context.GetItem<UserModel>(id,table));
+        }
+
+        [HttpGet("getapps")]
+        public IActionResult Get()
+        {
+            return Ok(_context.GetItems<UserModel>(table));
         }
 
         [HttpPost("purchase")]

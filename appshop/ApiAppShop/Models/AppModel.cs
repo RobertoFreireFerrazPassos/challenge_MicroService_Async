@@ -1,10 +1,8 @@
-﻿using MongoDB.Bson;
-
-namespace ApiAppShop.Models
+﻿namespace ApiAppShop.Models
 {
     public class AppModel
     {
-        public ObjectId Id { get; set; }
+        public object Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 using ApiAppShop.Repository;
+using CustomerPortalPersistence.CrossCutting.IoC;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,12 +22,27 @@ namespace ApiAppShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<Context>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiAppShop", Version = "v1" });
             });
+
+            services.AddMassTransit(bus =>
+            {
+                bus.UsingRabbitMq((ctx, busConfigurator) =>
+                {
+                    busConfigurator.Host(Configuration.GetConnectionString("RabbitMq"));
+                });
+            });
+            services.AddMassTransitHostedService();
+
+            RegisterServices(services);
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            NativeDependencyInjector.RegisterServices(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
