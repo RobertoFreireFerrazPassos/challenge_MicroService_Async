@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Events\Consumers\" />
+    <Folder Include="Events\EventsContracts\Response\" />
   </ItemGroup>
 
 </Project>

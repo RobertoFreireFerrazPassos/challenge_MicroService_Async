@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApiAppShop.Domain.Events.Base
+namespace ApiAppShop.Domain.Events
 {
     public abstract class Event
     {
@@ -9,8 +9,8 @@ namespace ApiAppShop.Domain.Events.Base
         private DateTime TimeStamp { get; }
 
         public Event(string identifier) {
-            Id = new Guid();
-            TimeStamp = new DateTime();
+            Id = Guid.NewGuid();
+            TimeStamp = DateTime.UtcNow;
             Identifier = identifier;
         }
     }

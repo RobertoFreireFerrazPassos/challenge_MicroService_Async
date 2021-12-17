@@ -1,5 +1,4 @@
-﻿using ApiAppShop.Domain.Events.Base;
-using ApiAppShop.Domain.ValueObjects;
+﻿using ApiAppShop.Domain.ValueObjects;
 
 namespace ApiAppShop.Domain.Events
 {

@@ -13,3 +13,9 @@ services:
       context: .
       dockerfile: ApiAppShop/Dockerfile
 
+
+  creditcardprocessor:
+    image: ${DOCKER_REGISTRY-}creditcardprocessor
+    build:
+      context: .
+      dockerfile: CreditCardProcessor/Dockerfile
