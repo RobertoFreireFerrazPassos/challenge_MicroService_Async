@@ -11,6 +11,7 @@ namespace ApiAppShop.Application.Infrastructure.AutoMapper
             MapperConfiguration mapperConfiguration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AppProfile());
+                cfg.AddProfile(new PurchaseProfile());                
             });
 
 

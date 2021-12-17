@@ -5,16 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApiAppShop.Domain\ApiAppShop.Domain.csproj" />
+    <ProjectReference Include="..\ApiAppShop.Events\ApiAppShop.Events.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,10 @@
-﻿using ApiAppShop.Domain.Services;
+﻿using ApiAppShop.Domain.Dtos;
+using ApiAppShop.Domain.Services;
 using ApiUser.Application.DataContracts;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Controllers
 {
@@ -10,30 +13,60 @@ namespace ApiAppShop.Controllers
     public class AppController : ControllerBase
     {
         private IAppService _appService;
+        private IPurchaseService _purchaseService;
+        private readonly IMapper _mapper;
 
-        public AppController(IAppService appService)
+        public AppController(IAppService appService,
+            IPurchaseService purchaseService,
+            IMapper mapper)
         {
             _appService = appService ??
                 throw new ArgumentNullException(nameof(appService));
+            _purchaseService = purchaseService ??
+                throw new ArgumentNullException(nameof(purchaseService));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet("setapp")]
         public IActionResult Set(AppResponse appCreationRequest)
         {
-            _appService.SetItem(appCreationRequest);
+            //_appService.SetItem(appCreationRequest);
             return Ok();
         }
 
         [HttpGet("getapps")]
         public IActionResult Get()
         {
-            return Ok(_appService.GetItems<AppResponse>());
+            //var apps = _appService.GetItems<AppResponse>();
+            //return Ok(apps);
+            return Ok();
         }
 
         [HttpPost("purchase")]
-        public IActionResult Purchase([FromBody] PurchaseRequest purchaseRequest)
+        public async Task<IActionResult> Purchase([FromBody] PurchaseRequest purchaseRequest)
         {
-            return Ok();
+            try
+            {
+                await _purchaseService.PurchaseAsync(_mapper.Map<AppPurchaseDto>(purchaseRequest));
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
+
+/*{
+    "appId": "d24a3c0d-117a-4637-a078-2d386d7a6952",
+  "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
+  "saveCreditCard": true,
+  "creditCard": {
+        "name": "Adalto Jarbas Lopes",
+    "number": "5496374407457455",
+    "cvv": "123",
+    "expirationDateMMYYYY": "122025"
+  }
+}*/

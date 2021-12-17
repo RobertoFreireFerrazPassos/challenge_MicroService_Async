@@ -1,4 +1,4 @@
-using ApiAppShop.Repository;
+using ApiAppShop.Application.Infrastructure.AutoMapper;
 using ApiAppShop.CrossCutting.IoC;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +38,7 @@ namespace ApiAppShop
             services.AddMassTransitHostedService();
 
             RegisterServices(services);
+            AutoMapperConfiguration.RegisterMappings(services);
         }
 
         private void RegisterServices(IServiceCollection services)

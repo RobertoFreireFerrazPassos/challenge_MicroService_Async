@@ -1,4 +1,4 @@
-﻿using ApiAppShop.Application.DataContracts.Common;
+﻿using ApiAppShop.Domain.ValueObjects;
 using ApiUser.Domain.Enums;
 using System;
 

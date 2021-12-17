@@ -6,7 +6,7 @@ namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles
     {
         public AppProfile()
         {
-            CreateMap<UserEntity, UserDto>().ReverseMap();
+            //CreateMap<UserEntity, UserDto>().ReverseMap();
         }
     }
 }

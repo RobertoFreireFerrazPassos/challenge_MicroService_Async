@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiAppShop.Application\ApiAppShop.Application.csproj" />
     <ProjectReference Include="..\ApiAppShop.DataAccess\ApiAppShop.DataAccess.csproj" />
     <ProjectReference Include="..\ApiAppShop.Domain\ApiAppShop.Domain.csproj" />
   </ItemGroup>

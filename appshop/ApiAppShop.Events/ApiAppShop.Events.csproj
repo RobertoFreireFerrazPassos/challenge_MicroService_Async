@@ -6,7 +6,15 @@
 
   <ItemGroup>
     <Folder Include="Consumers\" />
-    <Folder Include="Producers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiAppShop.Domain\ApiAppShop.Domain.csproj" />
   </ItemGroup>
 
 </Project>

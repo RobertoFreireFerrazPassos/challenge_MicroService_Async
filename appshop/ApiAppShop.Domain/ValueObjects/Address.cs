@@ -1,4 +1,4 @@
-﻿namespace ApiAppShop.Application.DataContracts.Common
+﻿namespace ApiAppShop.Domain.ValueObjects
 {
     public class Address
     {

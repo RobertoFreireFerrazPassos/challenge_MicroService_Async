@@ -1,12 +1,12 @@
 ﻿using ApiAppShop.Domain.ValueObjects;
 
-namespace ApiUser.Application.DataContracts
+namespace ApiAppShop.Domain.Dtos
 {
-    public class PurchaseRequest
+    public class AppPurchaseDto
     {
         public string AppId { get; set; }
         public string UserId { get; set; }
         public bool SaveCreditCard { get; set; }
-        public CreditCard CreditCard { get; set; }        
+        public CreditCard CreditCard { get; set; }
     }
 }
