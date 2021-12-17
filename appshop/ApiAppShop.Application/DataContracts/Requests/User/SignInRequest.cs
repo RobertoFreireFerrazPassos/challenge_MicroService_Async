@@ -1,16 +1,18 @@
-﻿using ApiUser.Enums;
+﻿using ApiAppShop.Application.DataContracts.Common;
+using ApiUser.Domain.Enums;
 using System;
 
-namespace ApiUser.Models
+namespace ApiAppShop.Application.DataContracts.Requests.User
 {
-    public class UserModel
+    public class SignInRequest
     {
-        public object Id { get; set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
         public DateTime BirthDate { get; set; }
         public GenderEnum Gender { get; set; }
         public Address Address { get; set; }
-        public CreditCardModel CreditCard { get; set; }
+        public CreditCard CreditCard { get; set; }
+    }
 }
-}
+
+

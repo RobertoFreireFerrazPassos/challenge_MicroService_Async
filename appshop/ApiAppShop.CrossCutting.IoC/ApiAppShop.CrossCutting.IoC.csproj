@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApiAppShop.DataAccess\ApiAppShop.DataAccess.csproj" />
+    <ProjectReference Include="..\ApiAppShop.Domain\ApiAppShop.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

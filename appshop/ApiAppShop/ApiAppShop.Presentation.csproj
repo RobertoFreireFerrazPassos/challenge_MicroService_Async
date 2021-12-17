@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiAppShop.Application\ApiAppShop.Application.csproj" />
     <ProjectReference Include="..\ApiAppShop.CrossCutting.IoC\ApiAppShop.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\ApiAppShop.Domain\ApiAppShop.Domain.csproj" />
   </ItemGroup>
 
 </Project>

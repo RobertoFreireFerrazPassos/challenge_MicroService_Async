@@ -1,13 +1,12 @@
-﻿using CustomerPortalPersistence.Domain.Entities.Base;
-using System;
+﻿using ApiAppShop.Domain.Entities;
 using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
 
-namespace CustomerPortalPersistence.Domain.Repositories.Base
+namespace ApiAppShop.Domain.Repositories.Base
 {
 	public interface IRepository<T> where T : Entity
 	{
-		Task AddAsync(T entity, string query);
+        public void SetItem(T item);
+        public IEnumerable<T> GetItems();
+        public T GetItem(string id);
     }
 }

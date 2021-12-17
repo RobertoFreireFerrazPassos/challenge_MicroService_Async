@@ -1,4 +1,4 @@
-﻿namespace CustomerPortalPersistence.Domain.Entities.Base
+﻿namespace ApiAppShop.Domain.Entities
 {
     public abstract class Entity
     {

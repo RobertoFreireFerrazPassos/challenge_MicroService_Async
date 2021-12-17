@@ -1,4 +1,4 @@
-﻿namespace ApiUser.Models
+﻿namespace ApiAppShop.Application.DataContracts.Common
 {
     public class Address
     {

@@ -1,21 +1,15 @@
-﻿using MassTransit;
+﻿using ApiAppShop.DataAccess.Repositories;
+using ApiAppShop.Domain.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CustomerPortalPersistence.CrossCutting.IoC
+namespace ApiAppShop.CrossCutting.IoC
 {
 	public class NativeDependencyInjector
 	{
-		public static void RegisterServices(IServiceCollection services,
-			IConfiguration configuration)
+		public static void RegisterServices(IServiceCollection services)
 		{
-			// Infrastructure
-			services.AddSingleton<Interface, Class>();
-
-            // Services
-            services.AddScoped<Interface, Class>();
-
-			services.AddTransient<Context>();
+            services.AddScoped<IAppRepository, AppRepository>();
 		}
     }
 }

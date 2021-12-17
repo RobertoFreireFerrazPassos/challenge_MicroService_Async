@@ -1,5 +1,5 @@
 using ApiAppShop.Repository;
-using CustomerPortalPersistence.CrossCutting.IoC;
+using ApiAppShop.CrossCutting.IoC;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,7 +42,7 @@ namespace ApiAppShop
 
         private void RegisterServices(IServiceCollection services)
         {
-            NativeDependencyInjector.RegisterServices(services, Configuration);
+            NativeDependencyInjector.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

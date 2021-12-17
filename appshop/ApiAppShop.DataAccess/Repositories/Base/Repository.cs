@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
+using ApiAppShop.Domain.Repositories.Base;
+using ApiAppShop.Domain.Entities;
 
 namespace ApiAppShop.Repository
 {
@@ -11,9 +12,12 @@ namespace ApiAppShop.Repository
         private IConfiguration _configuration;
         private readonly string ConexaoNoSql = "ConexaoNoSql";
         private readonly string Db = "DB";
+        private string _table;
 
-        public Repository(IConfiguration config)
+        public Repository(IConfiguration config,
+            string table)
         {
+            _table = table;
             _configuration = config;
         }
 
@@ -23,50 +27,20 @@ namespace ApiAppShop.Repository
             return client.GetDatabase(Db);
         }
 
-        public T GetItem<T>(string id, string table) 
+        public T GetItem(string id) 
         {
-            IMongoDatabase db = GetDatabase();
-
             var filter = Builders<T>.Filter.Eq("Id", id);
-
-            try
-            {
-                return db.GetCollection<T>(table).Find(filter).FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return default;
-            }
+            return GetDatabase().GetCollection<T>(_table).Find(filter).FirstOrDefault();
         }
 
-        public IEnumerable<T> GetItems<T>(string table)
+        public IEnumerable<T> GetItems()
         {
-            IMongoDatabase db = GetDatabase();
-
-            try
-            {
-                return db.GetCollection<T>(table).Find(_ => true).ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return default;
-            }
+            return GetDatabase().GetCollection<T>(_table).Find(_ => true).ToList();
         }
 
-        public void SetItem<T>(T item,string table)
+        public void SetItem(T item)
         {
-            IMongoDatabase db = GetDatabase();
-
-            try
-            {
-                db.GetCollection<T>(table).InsertOne(item);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }            
+            GetDatabase().GetCollection<T>(_table).InsertOne(item);
         }
     }
 }
