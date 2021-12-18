@@ -1,6 +1,6 @@
-﻿namespace CreditCardProcessor
+﻿namespace ApiAppShop
 {
-    using CreditCardProcessor.Events.Consumers;
+    using ApiAppShop.Domain.Consumers;
     using MassTransit;
     using System;
     using System.Threading;

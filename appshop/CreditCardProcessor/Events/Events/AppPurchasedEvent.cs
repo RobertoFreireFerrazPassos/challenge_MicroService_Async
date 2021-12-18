@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CreditCardProcessor.Events
+namespace ApiAppShop.Domain.Events
 {
     public interface AppPurchasedEvent
     {

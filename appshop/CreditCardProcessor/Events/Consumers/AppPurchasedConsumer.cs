@@ -1,8 +1,9 @@
-﻿using MassTransit;
+﻿using ApiAppShop.Domain.Events;
+using MassTransit;
 using System;
 using System.Threading.Tasks;
 
-namespace CreditCardProcessor.Events.Consumers
+namespace ApiAppShop.Domain.Consumers
 {
     public class AppPurchasedConsumer : IConsumer<AppPurchasedEvent>
     {
