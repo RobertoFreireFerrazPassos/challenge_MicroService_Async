@@ -1,12 +1,14 @@
-﻿using CreditCardProcessor.Events.Consumers;
-using MassTransit;
-using System;
-
-namespace CreditCardProcessor
+﻿namespace CreditCardProcessor
 {
+    using CreditCardProcessor.Events.Consumers;
+    using MassTransit;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     class Program
-    {
-        static void Main(string[] args)
+    {                  
+        public static async Task Main()
         {
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
@@ -14,14 +16,24 @@ namespace CreditCardProcessor
                 cfg.ReceiveEndpoint("app-purchased", e =>
                 {
                     e.Consumer<AppPurchasedConsumer>();
-                    e.PrefetchCount = 10;
                 });
             });
-            busControl.Start();
 
             Console.WriteLine("Waiting for messages...");
 
-            while (true) ;
+            var source = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+
+            await busControl.StartAsync(source.Token);
+            try
+            {
+                Console.WriteLine("Press enter to exit");
+
+                await Task.Run(() => Console.ReadLine());
+            }
+            finally
+            {
+                await busControl.StopAsync();
+            }
         }
     }
 }

@@ -13,7 +13,8 @@ services:
     ports:
       - "9002:80" 
     depends_on:
-    - mongodbcontainer
+      - mongodbcontainer
+      - rabbitmq
 
   mongodbcontainer:
     image: mongo    
@@ -28,5 +29,5 @@ services:
   
   creditcardprocessor:
     depends_on:
-        - rabbitmq
+      - rabbitmq
 
