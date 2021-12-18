@@ -11,7 +11,7 @@ namespace CreditCardProcessor.Events
         public CreditCard CreditCard { get; set; }
     }
 
-    public class CreditCard
+    public interface CreditCard
     {
         public string Name { get; set; }
         public string Number { get; set; }
