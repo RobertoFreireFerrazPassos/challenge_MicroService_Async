@@ -1,7 +1,8 @@
 ﻿namespace ApiAppShop
 {
-    using ApiAppShop.Domain.Consumers;
+    using CreditCardProcessor.Events.Infrastructure;
     using MassTransit;
+    using MassTransit.RabbitMqTransport;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,10 +14,7 @@
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 cfg.Host("amqp://guest:guest@rabbitmq:5672");
-                cfg.ReceiveEndpoint("app-purchased", e =>
-                {
-                    e.Consumer<AppPurchasedConsumer>();
-                });
+                RegisterReceiveEndpoints(cfg);                
             });
 
             Console.WriteLine("Waiting for messages...");
@@ -34,6 +32,11 @@
             {
                 await busControl.StopAsync();
             }
+        }
+
+        private static void RegisterReceiveEndpoints(IRabbitMqBusFactoryConfigurator configurator)
+        {
+            ReceiveEndpoints.RegisterReceiveEndpoints(configurator);
         }
     }
 }

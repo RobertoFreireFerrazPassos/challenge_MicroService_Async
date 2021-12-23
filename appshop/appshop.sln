@@ -19,19 +19,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A9F24D9D-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AABFE64E-35DB-4B8A-9166-89C7CF934243}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.CrossCutting.IoC", "ApiAppShop.CrossCutting.IoC\ApiAppShop.CrossCutting.IoC.csproj", "{8E4BC10C-55BC-493D-B12C-4B75764C17A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAppShop.CrossCutting.IoC", "ApiAppShop.CrossCutting.IoC\ApiAppShop.CrossCutting.IoC.csproj", "{8E4BC10C-55BC-493D-B12C-4B75764C17A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.Events", "ApiAppShop.Events\ApiAppShop.Events.csproj", "{18BFCB0F-A377-495A-9E68-3584DC85E5BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAppShop.Events", "ApiAppShop.Events\ApiAppShop.Events.csproj", "{18BFCB0F-A377-495A-9E68-3584DC85E5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.DataAccess", "ApiAppShop.DataAccess\ApiAppShop.DataAccess.csproj", "{EFDA4152-1268-4DE9-A61E-8D6AB61FFB58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAppShop.DataAccess", "ApiAppShop.DataAccess\ApiAppShop.DataAccess.csproj", "{EFDA4152-1268-4DE9-A61E-8D6AB61FFB58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.Domain", "ApiAppShop.Domain\ApiAppShop.Domain.csproj", "{7D1A2716-1290-467E-B113-9623739B61B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAppShop.Domain", "ApiAppShop.Domain\ApiAppShop.Domain.csproj", "{7D1A2716-1290-467E-B113-9623739B61B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.Application", "ApiAppShop.Application\ApiAppShop.Application.csproj", "{0F370CAE-91D8-4867-90FE-FF8650A200E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAppShop.Application", "ApiAppShop.Application\ApiAppShop.Application.csproj", "{0F370CAE-91D8-4867-90FE-FF8650A200E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleCreditCardProcessor", "ConsoleCreditCardProcessor", "{9C90D50A-0591-43CA-99DF-C4BBC1C34D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCardProcessor", "CreditCardProcessor\CreditCardProcessor.csproj", "{F04D1B87-11EC-43B1-A93A-3502A9CFA88A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardProcessor", "CreditCardProcessor\CreditCardProcessor.csproj", "{F04D1B87-11EC-43B1-A93A-3502A9CFA88A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

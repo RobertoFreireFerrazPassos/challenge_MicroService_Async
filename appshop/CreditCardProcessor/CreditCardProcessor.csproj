@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Events\Producers\" />
+    <Folder Include="Services\Validation\" />
   </ItemGroup>
 
 </Project>
