@@ -24,7 +24,7 @@ namespace ApiAppShop.Domain.Consumers
             else 
             {
                 Console.WriteLine($"Credit Card {creditCardNumber} denied");
-            }   
+            }
         }
     }
 }
