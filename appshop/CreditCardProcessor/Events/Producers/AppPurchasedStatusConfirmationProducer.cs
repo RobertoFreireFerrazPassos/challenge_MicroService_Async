@@ -7,24 +7,16 @@ namespace CreditCardProcessor.Events.Producers
 {
     public class AppPurchasedStatusConfirmationProducer
     {
-        private readonly IPublishEndpoint _publisher;
-
-        public AppPurchasedStatusConfirmationProducer(IPublishEndpoint publisher)
+        public static async Task Publish(AppPurchasedStatusConfirmation appPurchasedStatusConfirmation)
         {
-            _publisher = publisher;
-        }
-
-        public async Task Publish(AppPurchasedEvent appPurchasedEvent, 
-            bool statusConfirmation)
-        {
-            await _publisher.Publish<AppPurchasedStatusConfirmation>(new AppPurchasedStatusConfirmation
+            var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                Id = Guid.NewGuid().ToString(),
-                TimeStamp = DateTime.UtcNow,
-                AppId = appPurchasedEvent.AppId,
-                UserId = appPurchasedEvent.UserId,
-                StatusConfirmation = statusConfirmation
+                cfg.Host("amqp://guest:guest@rabbitmq:5672");
             });
+
+            Console.WriteLine("Publishing AppPurchasedStatusConfirmation...");
+
+            await busControl.Publish<AppPurchasedStatusConfirmation>(appPurchasedStatusConfirmation);
         }
     }
 }

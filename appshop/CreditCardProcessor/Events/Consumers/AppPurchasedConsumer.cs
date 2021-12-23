@@ -1,4 +1,5 @@
 ﻿using ApiAppShop.Domain.Events;
+using CreditCardProcessor.Events.Producers;
 using CreditCardProcessor.Services.Validation;
 using MassTransit;
 using System;
@@ -10,21 +11,32 @@ namespace ApiAppShop.Domain.Consumers
     {
         public async Task Consume(ConsumeContext<AppPurchasedEvent> context)
         {
-            var userId = context.Message.UserId;
-            var appId = context.Message.AppId;
-            var creditCard = context.Message.CreditCard;
-            bool validCreditCard = CreditCardValidator.Validate(creditCard);
-            string creditCardNumber = CreditCardValidator.GetCreditCardLast4Numbers(creditCard);
+            bool validCreditCard;
+            ValidateCreditCard(context.Message.CreditCard, out validCreditCard);
 
-            if (validCreditCard)
+            var appPurchasedStatusConfirmation = new AppPurchasedStatusConfirmation
             {
-                Console.WriteLine($"Valid Credit Card {creditCardNumber}");
-                Console.WriteLine($"App: [{appId}] purchased by {userId}");
-            }
-            else 
-            {
-                Console.WriteLine($"Credit Card {creditCardNumber} denied");
-            }
+                Id = Guid.NewGuid().ToString(),
+                TimeStamp = DateTime.UtcNow,
+                AppId = context.Message.AppId,
+                UserId = context.Message.UserId,
+                StatusConfirmation = validCreditCard
+            };
+
+            AppPurchasedStatusConfirmationProducer.Publish(appPurchasedStatusConfirmation);            
+        }
+
+        private void ValidateCreditCard(CreditCard creditCard, out bool validCreditCard) 
+        {
+            string creditCardNumber = CreditCardValidator.GetCreditCardLast4Numbers(creditCard);
+            validCreditCard = CreditCardValidator.Validate(creditCard);
+            PrintCreditCardValidatorMessage(validCreditCard, creditCardNumber);
+        }
+
+        private void PrintCreditCardValidatorMessage(bool validCreditCard, string creditCardNumber)
+        {
+            string message = validCreditCard ? $"Valid Credit Card {creditCardNumber}." : $"Credit Card {creditCardNumber} denied.";
+            Console.WriteLine(message);
         }
     }
 }
