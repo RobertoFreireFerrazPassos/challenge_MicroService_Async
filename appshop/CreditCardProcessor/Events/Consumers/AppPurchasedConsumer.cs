@@ -14,7 +14,7 @@ namespace ApiAppShop.Domain.Consumers
             bool validCreditCard;
             ValidateCreditCard(context.Message.CreditCard, out validCreditCard);
 
-            var appPurchasedStatusConfirmation = new AppPurchasedStatusConfirmation
+            var appPurchasedStatusConfirmation = new AppPurchasedStatusConfirmationEvent
             {
                 Id = Guid.NewGuid().ToString(),
                 TimeStamp = DateTime.UtcNow,

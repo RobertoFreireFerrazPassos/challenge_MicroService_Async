@@ -2,7 +2,7 @@
 
 namespace ApiAppShop.Domain.Events
 {
-    public class AppPurchasedStatusConfirmationEvent
+    public interface AppPurchasedStatusConfirmationEvent
     {
         public string Id { get; set; }
         public DateTime TimeStamp { get; set; }

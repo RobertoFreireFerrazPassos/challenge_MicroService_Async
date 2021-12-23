@@ -1,5 +1,6 @@
 using ApiAppShop.Application.Infrastructure.AutoMapper;
 using ApiAppShop.CrossCutting.IoC;
+using ApiAppShop.Domain.Consumers;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,9 +31,16 @@ namespace ApiAppShop
 
             services.AddMassTransit(bus =>
             {
-                bus.UsingRabbitMq((ctx, busConfigurator) =>
+                bus.AddConsumer<AppPurchasedStatusConfirmationConsumer>();
+
+                bus.UsingRabbitMq((context, busConfigurator) =>
                 {
                     busConfigurator.Host(Configuration.GetConnectionString("RabbitMq"));
+
+                    busConfigurator.ReceiveEndpoint("AppPurchased_StatusConfirmation", e =>
+                    {
+                        e.ConfigureConsumer<AppPurchasedStatusConfirmationConsumer>(context);
+                    });
                 });
             });
             services.AddMassTransitHostedService();

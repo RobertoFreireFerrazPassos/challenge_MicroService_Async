@@ -7,7 +7,7 @@ namespace CreditCardProcessor.Events.Producers
 {
     public class AppPurchasedStatusConfirmationProducer
     {
-        public static async Task Publish(AppPurchasedStatusConfirmation appPurchasedStatusConfirmation)
+        public static async Task Publish(AppPurchasedStatusConfirmationEvent appPurchasedStatusConfirmation)
         {
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
@@ -16,7 +16,7 @@ namespace CreditCardProcessor.Events.Producers
 
             Console.WriteLine("Publishing AppPurchasedStatusConfirmation...");
 
-            await busControl.Publish<AppPurchasedStatusConfirmation>(appPurchasedStatusConfirmation);
+            await busControl.Publish<AppPurchasedStatusConfirmationEvent>(appPurchasedStatusConfirmation);
         }
     }
 }
