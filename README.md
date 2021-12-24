@@ -12,6 +12,7 @@ Request to test docker, api gateway, api appshop, rabbitmq, masstransit and cred
 1 - Run docker compose on visual studio.
 
 2 - Import and run this request on Postman:
+
 curl --location --request POST 'http://localhost:9001/purchase' \
 --header 'accept: */*' \
 --header 'Content-Type: application/json' \
