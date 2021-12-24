@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleCreditCardProcessor.Tests.Builders
+﻿namespace ConsoleCreditCardProcessor.Tests.Builders
 {
     public interface IBuilder<T> where T : new()
     {
