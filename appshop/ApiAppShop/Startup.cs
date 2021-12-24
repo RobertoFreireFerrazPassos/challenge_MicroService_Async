@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 
 namespace ApiAppShop
 {
@@ -29,21 +30,8 @@ namespace ApiAppShop
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiAppShop", Version = "v1" });
             });
 
-            services.AddMassTransit(bus =>
-            {
-                bus.AddConsumer<AppPurchasedStatusConfirmationConsumer>();
-
-                bus.UsingRabbitMq((context, busConfigurator) =>
-                {
-                    busConfigurator.Host(Configuration.GetConnectionString("RabbitMq"));
-
-                    busConfigurator.ReceiveEndpoint("AppPurchased_StatusConfirmation", e =>
-                    {
-                        e.ConfigureConsumer<AppPurchasedStatusConfirmationConsumer>(context);
-                    });
-                });
-            });
-            services.AddMassTransitHostedService();
+            RegisterRedisCacheService.Register(services, Configuration.GetConnectionString("RabbitMq"));
+            RegisterRedisCacheService.Register(services, Configuration.GetConnectionString("RedisCache"));
 
             RegisterServices(services);
             AutoMapperConfiguration.RegisterMappings(services);

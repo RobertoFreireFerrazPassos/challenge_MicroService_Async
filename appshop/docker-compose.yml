@@ -12,9 +12,19 @@ services:
     build:
       context: .
       dockerfile: ApiAppShop/Dockerfile
+    depends_on:
+      - "redisdb"
+    links:
+      - "redisdb"
 
   creditcardprocessor:
     image: ${DOCKER_REGISTRY-}creditcardprocessor
     build:
       context: .
       dockerfile: CreditCardProcessor/Dockerfile
+
+  redisdb:
+    image: redis
+    container_name: redis_cache
+    ports:
+      - "6379:6379"

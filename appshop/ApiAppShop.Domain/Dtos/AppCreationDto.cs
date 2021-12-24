@@ -1,6 +1,6 @@
-﻿namespace ApiUser.Application.DataContracts
+﻿namespace ApiAppShop.Domain.Dtos
 {
-    public class AppCreationRequest
+    public class AppCreationDto
     {
         public string UserId { get; set; }
         public string Name { get; set; }

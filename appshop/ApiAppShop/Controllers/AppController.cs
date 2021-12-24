@@ -29,18 +29,24 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpGet("setapp")]
-        public IActionResult Set(AppResponse appCreationRequest)
+        public IActionResult Set(AppCreationRequest appCreationRequest)
         {
-            //_appService.SetItem(appCreationRequest);
+            _appService.SetItem(_mapper.Map<AppCreationDto>(appCreationRequest));
             return Ok();
         }
 
         [HttpGet("getapps")]
         public IActionResult Get()
         {
-            //var apps = _appService.GetItems<AppResponse>();
-            //return Ok(apps);
-            return Ok();
+            var apps = _appService.GetItems();            
+            return Ok(_mapper.Map<AppResponse>(apps));
+        }
+
+        [HttpGet("getappsbyuser/{userid}")]
+        public IActionResult GetByUser(string userid)
+        {
+            var apps = _appService.GetItem(userid);
+            return Ok(_mapper.Map<AppResponse>(apps));
         }
 
         [HttpPost("purchase")]
