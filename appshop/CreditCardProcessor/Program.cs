@@ -1,6 +1,7 @@
 ﻿namespace ApiAppShop
 {
     using CreditCardProcessor.Events.Infrastructure;
+    using CreditCardProcessor.Infrastructure;
     using MassTransit;
     using MassTransit.RabbitMqTransport;
     using Microsoft.Extensions.Configuration;
@@ -12,12 +13,9 @@
 
     class Program
     {
-        public static IConfigurationRoot configuration;
-
         public static async Task Main()
         {
-            ServiceCollection serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
+            IConfigurationRoot configuration = Appsettings.GetConfiguration();
 
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
@@ -40,16 +38,6 @@
             {
                 await busControl.StopAsync();
             }
-        }
-
-        private static void ConfigureServices(IServiceCollection serviceCollection)
-        {
-            configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-                .AddJsonFile("appsettings.json", false)
-                .Build();
-
-            serviceCollection.AddSingleton<IConfigurationRoot>(configuration);
         }
 
         private static void RegisterReceiveEndpoints(IRabbitMqBusFactoryConfigurator configurator)
