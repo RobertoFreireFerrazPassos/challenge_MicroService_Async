@@ -35,6 +35,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCardProcessor", "Cred
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8557514C-8111-4EA6-AAF3-BB468DF57D6C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleCreditCardProcessor.Tests", "ConsoleCreditCardProcessor.Tests", "{6DA6FF22-BD9D-47AC-81F9-8806643A7CB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCreditCardProcessor.Tests", "ConsoleCreditCardProcessor.Tests\ConsoleCreditCardProcessor.Tests.csproj", "{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{F04D1B87-11EC-43B1-A93A-3502A9CFA88A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F04D1B87-11EC-43B1-A93A-3502A9CFA88A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F04D1B87-11EC-43B1-A93A-3502A9CFA88A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,8 @@ Global
 		{7D1A2716-1290-467E-B113-9623739B61B2} = {A9F24D9D-1626-4962-B959-F8D8BC45264D}
 		{0F370CAE-91D8-4867-90FE-FF8650A200E6} = {A9F24D9D-1626-4962-B959-F8D8BC45264D}
 		{F04D1B87-11EC-43B1-A93A-3502A9CFA88A} = {9C90D50A-0591-43CA-99DF-C4BBC1C34D12}
+		{6DA6FF22-BD9D-47AC-81F9-8806643A7CB5} = {8557514C-8111-4EA6-AAF3-BB468DF57D6C}
+		{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F} = {6DA6FF22-BD9D-47AC-81F9-8806643A7CB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF31D2E9-8B19-483B-B98A-8DF03697422F}

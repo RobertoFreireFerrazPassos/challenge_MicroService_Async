@@ -28,14 +28,14 @@ namespace ApiAppShop.Domain.Consumers
 
         private void ValidateCreditCard(CreditCard creditCard, out bool validCreditCard) 
         {
-            string creditCardNumber = CreditCardValidator.GetCreditCardLast4Numbers(creditCard);
+            string creditCardLast4Numbers = CreditCardValidator.GetCreditCardLast4Numbers(creditCard);
             validCreditCard = CreditCardValidator.Validate(creditCard);
-            PrintCreditCardValidatorMessage(validCreditCard, creditCardNumber);
+            PrintCreditCardValidatorMessage(validCreditCard, creditCardLast4Numbers);
         }
 
         private void PrintCreditCardValidatorMessage(bool validCreditCard, string creditCardNumber)
         {
-            string message = validCreditCard ? $"Valid Credit Card {creditCardNumber}." : $"Credit Card {creditCardNumber} denied.";
+            string message = validCreditCard ? $"Valid Credit Card **{creditCardNumber}." : $"Credit Card **{creditCardNumber} denied.";
             Console.WriteLine(message);
         }
     }

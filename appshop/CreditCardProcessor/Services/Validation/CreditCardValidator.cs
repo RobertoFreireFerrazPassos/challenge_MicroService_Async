@@ -18,7 +18,7 @@ namespace CreditCardProcessor.Services.Validation
             int  creditCardNumberLength = creditCardNumber.Length;
             if (creditCardNumberLength <= 4) return "";
 
-            return "**" + creditCardNumber.Substring(creditCardNumberLength - 4);
+            return creditCardNumber.Substring(creditCardNumberLength - 4);
         }
     }
 }
