@@ -7,8 +7,11 @@ namespace ApiAppShop.CrossCutting.IoC
     {
         public static void Register(IServiceCollection services, string connectionString)
         {
-            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect(connectionString);
-            services.AddScoped(s => redis.GetDatabase());
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = connectionString;
+                options.InstanceName = "RedisCacheInstance";
+            });
         }
     }
 }

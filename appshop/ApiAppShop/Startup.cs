@@ -1,14 +1,11 @@
 using ApiAppShop.Application.Infrastructure.AutoMapper;
 using ApiAppShop.CrossCutting.IoC;
-using ApiAppShop.Domain.Consumers;
-using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
 
 namespace ApiAppShop
 {
@@ -30,7 +27,7 @@ namespace ApiAppShop
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiAppShop", Version = "v1" });
             });
 
-            RegisterRedisCacheService.Register(services, Configuration.GetConnectionString("RabbitMq"));
+            RegisterMassTransitService.Register(services, Configuration.GetConnectionString("RabbitMq"));
             RegisterRedisCacheService.Register(services, Configuration.GetConnectionString("RedisCache"));
 
             RegisterServices(services);

@@ -1,26 +1,26 @@
 ﻿using ApiAppShop.Domain.Cache;
-using StackExchange.Redis;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Collections.Generic;
 
 namespace ApiAppShop.Cache
 {
     public class RedisCache : ICache
     {
-        private readonly IDatabase _database;
+        private readonly IDistributedCache _database;
 
-        public RedisCache(IDatabase database)
+        public RedisCache(IDistributedCache database)
         {
             _database = database;
         }
 
         public string Get(string key)
         {
-            return _database.StringGet(key);
+            return _database.GetString(key);
         }
 
         public void Set(KeyValuePair<string, string> keyValue)
         {
-            _database.StringSet(keyValue.Key, keyValue.Value);
+            _database.SetString(keyValue.Key, keyValue.Value);
         }
     }
 }
