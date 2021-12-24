@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/apps/setapp",
+      "DownstreamPathTemplate": "/App/setapp",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/apps/getapp/{id}",
+      "DownstreamPathTemplate": "/App/getapp/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -25,7 +25,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/apps/purchase",
+      "DownstreamPathTemplate": "/App/purchase",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
