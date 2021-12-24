@@ -10,12 +10,7 @@ namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles
         public AppProfile()
         {
             CreateMap<AppCreationRequest, AppCreationDto>();
-            CreateMap<IEnumerable<AppDto>, AppResponse>()
-                .ConvertUsing(source => new AppResponse
-                    {
-                        Apps = (IEnumerable<App>)source
-                    }
-                );
+            CreateMap<AppDto,App>();
         }
     }
 }

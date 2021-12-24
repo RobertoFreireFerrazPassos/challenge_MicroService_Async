@@ -5,8 +5,7 @@ namespace ApiAppShop.Domain.Services
 {
     public interface IAppService
     {
-        public void SetItem(AppCreationDto appCreationRequest);
-        public IEnumerable<AppDto> GetItems();
-        public IEnumerable<AppDto> GetItem(string key);
+        public void AddAppByUser(AppCreationDto appCreationRequest);
+        public IEnumerable<AppDto> GetAppsByUser(string userId);
     }
 }

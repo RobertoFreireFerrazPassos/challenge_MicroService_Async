@@ -4,6 +4,7 @@ using ApiUser.Application.DataContracts;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ApiAppShop.Controllers
@@ -31,22 +32,27 @@ namespace ApiAppShop.Controllers
         [HttpPost("setapp")]
         public IActionResult Set(AppCreationRequest appCreationRequest)
         {
-            _appService.SetItem(_mapper.Map<AppCreationDto>(appCreationRequest));
+            _appService.AddAppByUser(_mapper.Map<AppCreationDto>(appCreationRequest));
             return Ok();
         }
 
         [HttpGet("getapps")]
         public IActionResult Get()
         {
-            var apps = _appService.GetItems();            
-            return Ok(_mapper.Map<AppResponse>(apps));
+            //var apps = _appService.Set();            
+            //return Ok(_mapper.Map<AppResponse>(apps));
+            return Ok();
         }
 
         [HttpGet("getappsbyuser/{userid}")]
         public IActionResult GetByUser(string userid)
         {
-            var apps = _appService.GetItem(userid);
-            return Ok(_mapper.Map<AppResponse>(apps));
+            var apps = _appService.GetAppsByUser(userid);
+            var response = new AppResponse()
+            {
+                Apps = _mapper.Map<IEnumerable<App>>(apps)
+            };
+            return Ok(response);
         }
 
         [HttpPost("purchase")]
@@ -65,7 +71,8 @@ namespace ApiAppShop.Controllers
     }
 }
 
-/*{
+/*
+{
     "appId": "d24a3c0d-117a-4637-a078-2d386d7a6952",
   "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
   "saveCreditCard": true,
@@ -75,4 +82,13 @@ namespace ApiAppShop.Controllers
     "cvv": "123",
     "expirationDateMMYYYY": "122025"
   }
-}*/
+}
+*/
+
+/*
+{
+    "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
+  "name": "App Teste",
+  "price": 120
+}
+*/

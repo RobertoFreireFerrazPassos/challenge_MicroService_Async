@@ -6,6 +6,6 @@ namespace ApiAppShop.Domain.Cache
     {
         public string Get(string key);
 
-        public void Set(KeyValuePair<string, string> keyValue);
+        public void Set(string key, string value);
     }
 }

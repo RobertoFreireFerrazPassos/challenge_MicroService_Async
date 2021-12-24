@@ -18,9 +18,9 @@ namespace ApiAppShop.Cache
             return _database.GetString(key);
         }
 
-        public void Set(KeyValuePair<string, string> keyValue)
+        public void Set(string key, string value)
         {
-            _database.SetString(keyValue.Key, keyValue.Value);
+            _database.SetString(key, value);
         }
     }
 }
