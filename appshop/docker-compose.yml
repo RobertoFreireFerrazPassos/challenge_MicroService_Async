@@ -14,8 +14,6 @@ services:
       dockerfile: ApiAppShop/Dockerfile
     depends_on:
       - "redisdb"
-    links:
-      - "redisdb"
 
   creditcardprocessor:
     image: ${DOCKER_REGISTRY-}creditcardprocessor
@@ -25,6 +23,6 @@ services:
 
   redisdb:
     image: redis
-    container_name: redis_cache
+    container_name: redisdb
     ports:
       - "6379:6379"

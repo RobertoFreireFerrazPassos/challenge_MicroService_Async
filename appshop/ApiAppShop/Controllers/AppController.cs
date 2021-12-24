@@ -28,7 +28,7 @@ namespace ApiAppShop.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet("setapp")]
+        [HttpPost("setapp")]
         public IActionResult Set(AppCreationRequest appCreationRequest)
         {
             _appService.SetItem(_mapper.Map<AppCreationDto>(appCreationRequest));

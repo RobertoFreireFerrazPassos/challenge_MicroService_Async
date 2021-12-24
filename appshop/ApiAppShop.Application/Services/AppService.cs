@@ -25,7 +25,9 @@ namespace ApiAppShop.Application.Services
                 Price = appCreationRequest.Price
             };
 
-            _cache.Set(KeyValuePair.Create(key, value.ToString()));
+            _cache.Set(KeyValuePair.Create("chave", "valor"));
+
+            //_cache.Set(KeyValuePair.Create(key, value.ToString()));
         }
 
         public IEnumerable<AppDto> GetItems()
@@ -35,9 +37,10 @@ namespace ApiAppShop.Application.Services
 
         public IEnumerable<AppDto> GetItem(string key)
         {
-            key = appbyuser + key;
-            var apps = _cache.Get(key);
+            var result = _cache.Get("chave");
+            //key = appbyuser + key;
+            //var apps = _cache.Get(key);
             return null;
-        }        
+        }
     }
 }

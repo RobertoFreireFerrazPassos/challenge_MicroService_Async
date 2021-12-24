@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using StackExchange.Redis;
 
 namespace ApiAppShop.CrossCutting.IoC
 {
@@ -7,7 +6,7 @@ namespace ApiAppShop.CrossCutting.IoC
     {
         public static void Register(IServiceCollection services, string connectionString)
         {
-            services.AddDistributedRedisCache(options =>
+            services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = connectionString;
                 options.InstanceName = "RedisCacheInstance";
