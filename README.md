@@ -119,11 +119,17 @@ it must have the creditcard new information provided durind app purchase
 1 - Using docker interface, access Mongodb Container
 
 2 - In command prompt, use commands:
+
 mongo
+
 show dbs
+
 use DB
+
 db.getCollectionNames()
+
 db.Users.find()
+
 
 3 - Get _id 
 ex:
