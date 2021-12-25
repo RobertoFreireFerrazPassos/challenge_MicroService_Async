@@ -7,19 +7,19 @@ using System.Collections.Generic;
 
 namespace ApiAppShop.DataAccess.Repositories
 {
-    public class UserRepository : Repository<AppEntity>, IAppRepository
+    public class UserRepository : Repository<UserEntity>, IUserRepository
     {
         private static readonly string Document = NoSqlDocumentConstants.USERS;
         public UserRepository(IConfiguration configuration) : base(configuration, Document)
         {
         }
 
-        public AppEntity GetUser(string id)
+        public UserEntity GetUser(string id)
         {
             return GetItem(id);
         }
 
-        public void SetUser(AppEntity item)
+        public void SetUser(UserEntity item)
         {
             SetItem(item);
         }
