@@ -112,7 +112,7 @@ namespace ApiAppShop.Controllers
   "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
   "saveCreditCard": true,
   "creditCard": {
-        "name": "Adalto Jarbas Lopes",
+        "name": "Alberto Junior",
     "number": "5496374407457455",
     "cvv": "123",
     "expirationDateMMYYYY": "122025"
