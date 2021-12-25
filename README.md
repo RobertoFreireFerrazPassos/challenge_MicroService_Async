@@ -10,6 +10,22 @@
 </p>
 
 
+## Pending/next steps:
+
+1 - Fix Api Gateway to point all endpoints correctly
+
+2 - Create more tests
+
+3 - Create Credit Card Validation 
+
+4 - Create Authorization with token
+
+5 - Insert Observer Design Pattern to listen to consumed events 
+
+6 - Add cache also for list of all apps
+
+7 - Add log messages structure 
+
 ## Notes
 
 RabbitMQ
