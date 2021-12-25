@@ -6,6 +6,7 @@ namespace ApiAppShop.Application.DataContracts.Requests.User
 {
     public class SignInRequest
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Cpf { get; set; }
         public DateTime BirthDate { get; set; }

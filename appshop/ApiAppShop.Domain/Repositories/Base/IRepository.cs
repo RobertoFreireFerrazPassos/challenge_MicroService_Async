@@ -8,5 +8,7 @@ namespace ApiAppShop.Domain.Repositories.Base
         public void SetItem(T item);
         public IEnumerable<T> GetItems();
         public T GetItem(string id);
+        public void UpdateItem(string itemId, string field, object value);
+        public void ReplaceItem(T item);
     }
 }

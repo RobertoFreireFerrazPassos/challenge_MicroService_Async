@@ -107,4 +107,9 @@ Endpoint /App/purchase
 
 Endpoint /App/getappsbyuser/{userid}
 
+7 - Redo test 2 (Test user created)
+it must have the creditcard new information provided durind app purchase
+
+
+
 

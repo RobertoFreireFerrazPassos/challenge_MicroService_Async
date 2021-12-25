@@ -6,6 +6,7 @@ using ApiAppShop.Domain.Repositories.Base;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Constants;
 using System;
+using MongoDB.Bson;
 
 namespace ApiAppShop.Repository
 {
@@ -31,19 +32,44 @@ namespace ApiAppShop.Repository
 
         public T GetItem(string id) 
         {
-            var filter = Builders<T>.Filter.Eq(RepositoryConstants.ID, id);
-            return GetDatabase().GetCollection<T>(_document).Find(filter).FirstOrDefault();
+            var filter = IdFilter(id);
+            return GetCollection().Find(filter).FirstOrDefault();
         }
 
         public IEnumerable<T> GetItems()
         {
-            return GetDatabase().GetCollection<T>(_document).Find(_ => true).ToList();
+            return GetCollection().Find(_ => true).ToList();
+        }
+
+        public void UpdateItem(string itemId, string field, object value)
+        {
+            var filter = IdFilter(itemId);
+            var update = Builders<T>.Update.Set(field, value);
+            GetCollection().UpdateOne(filter, update);
+        }
+
+        public void ReplaceItem(T item)
+        {
+            string itemId = item.Id;
+            var filter = IdFilter(itemId);
+            GetCollection().ReplaceOne(filter, item);
         }
 
         public void SetItem(T item)
         {
-            if (item.Id == null) item.Id = Guid.NewGuid().ToString();
-            GetDatabase().GetCollection<T>(_document).InsertOne(item);
+            string id = item.Id;
+            var filter = IdFilter(id);
+            item.Id = id ?? Guid.NewGuid().ToString();
+            GetCollection().InsertOne(item);
+        }
+        private FilterDefinition<T> IdFilter(string id) 
+        {
+            return Builders<T>.Filter.Eq(RepositoryConstants.ID, id);
+        }
+
+        private IMongoCollection<T> GetCollection() 
+        {
+            return GetDatabase().GetCollection<T>(_document);
         }
     }
 }

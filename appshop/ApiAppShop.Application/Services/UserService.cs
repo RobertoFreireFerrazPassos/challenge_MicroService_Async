@@ -31,7 +31,29 @@ namespace ApiAppShop.Application.Services
 
         public void SetUser(UserDto user)
         {
-            _userRepository.SetUser(_mapper.Map<UserEntity>(user));
+            string userId = user.Id;
+
+            var userFromDatabase = userId != null ? GetUser(userId) : null;
+
+            if (userFromDatabase == null)
+                SaveUser(user);
+            else
+                ReplaceUser(user);
+        }
+
+        private void SaveUser(UserDto user) 
+        {
+            _userRepository.SetUser(ConvertUserDtoToEntity(user));
+        }
+
+        private void ReplaceUser(UserDto user)
+        {
+            _userRepository.ReplaceUser(ConvertUserDtoToEntity(user));
+        }
+
+        private UserEntity ConvertUserDtoToEntity(UserDto user) 
+        {
+            return _mapper.Map<UserEntity>(user);
         }
     }
 }

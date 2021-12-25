@@ -22,5 +22,15 @@ namespace ApiAppShop.DataAccess.Repositories
         {
             SetItem(item);
         }
+
+        public void UpdateUser(string userId, string field, object value)
+        {
+            UpdateItem(userId, field, value);
+        }
+
+        public void ReplaceUser(UserEntity item)
+        {
+            ReplaceItem(item);
+        }
     }
 }

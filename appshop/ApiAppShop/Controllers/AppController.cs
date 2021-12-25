@@ -95,35 +95,3 @@ namespace ApiAppShop.Controllers
         }
     }
 }
-/*
-{
-    "name": "Alberto Junior",
-    "cpf": "",
-    "birthDate": "1993-12-25T17:44:35.665Z",
-    "gender": 0,
-    "address": null,
-    "creditCard": null
-}
-*/
-
-/*
-{
-    "appId": "d24a3c0d-117a-4637-a078-2d386d7a6952",
-  "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
-  "saveCreditCard": true,
-  "creditCard": {
-        "name": "Alberto Junior",
-    "number": "5496374407457455",
-    "cvv": "123",
-    "expirationDateMMYYYY": "122025"
-  }
-}
-*/
-
-/*
-{
-    "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
-  "name": "App Teste",
-  "price": 120
-}
-*/
