@@ -7,9 +7,7 @@ namespace CreditCardProcessor.Services.Validation
     {
         public static bool Validate(CreditCard creditCard)
         {
-            // validate credit card
-            Random rng = new Random();
-            return rng.Next(0, 2) > 0;
+            return true;
         }
     }
 }
