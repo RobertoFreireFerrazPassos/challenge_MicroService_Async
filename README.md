@@ -3,14 +3,14 @@
 # Microservices using asynchronous communication and api gateway
 
 
-# Architecture solution
+## Architecture solution
 
 <p align="center">
   <img src="https://github.com/RobertoFreireFerrazPassos/challenge_MicroService_Async/blob/master/appshop/modelagem.png?raw=true">
 </p>
 
 
-# Notes
+## Notes
 
 RabbitMQ
 http://localhost:15672/
@@ -19,7 +19,7 @@ username and password: guest / guest
 In docker containers such as ApiAppShop.Presentation, it is possible to see the console messages
 
 
-# Simple request to test docker, api gateway, api appshop, rabbitmq, masstransit and creditcard console app
+## Simple request to test docker, api gateway, api appshop, rabbitmq, masstransit and creditcard console app
 
 1 - Run docker compose on visual studio.
 
@@ -41,7 +41,9 @@ curl --location --request POST 'http://localhost:9001/purchase' \
 }'
 
 
-# Steps to complete test using swagger (http://localhost:9002/swagger/index.html)
+## Steps to complete test using swagger 
+
+(http://localhost:9002/swagger/index.html)
 
 1 - Create user
 
