@@ -26,6 +26,8 @@
 
 7 - Add log messages structure 
 
+8 - Apps purchased by users are only in cache. Fix to save in database and update cache correctly
+
 ## Notes
 
 RabbitMQ
