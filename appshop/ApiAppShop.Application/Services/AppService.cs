@@ -35,7 +35,6 @@ namespace ApiAppShop.Application.Services
 
         public void AddApp(AppDto addApp)
         {
-            addApp.Id = Guid.NewGuid().ToString();
             _appRepository.SetApp(_mapper.Map<AppEntity>(addApp));
         }
 
@@ -47,7 +46,16 @@ namespace ApiAppShop.Application.Services
 
         public AppDto GetApp(string appId)
         {
-            return _mapper.Map<AppDto>(_appRepository.GetApp(appId));
+            var app = _appRepository.GetApp(appId);
+            if (app == null) throw new Exception(ErrorMessageConstants.APP_DOESNT_EXIST);
+            return _mapper.Map<AppDto>(app);
+        }
+
+        public bool ValidateApp(string appId)
+        {
+            var app = _appRepository.GetApp(appId);
+            if (app == null) throw new Exception(ErrorMessageConstants.APP_DOESNT_EXIST);
+            return true;
         }
 
         public void AddAppByUser(AppPurchasedDto appPurchased)

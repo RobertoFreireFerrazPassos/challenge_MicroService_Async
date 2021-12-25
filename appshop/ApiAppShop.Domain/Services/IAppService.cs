@@ -10,5 +10,6 @@ namespace ApiAppShop.Domain.Services
         public void AddApp(AppDto addAppRequest);
         public IEnumerable<AppDto> GetApps();
         public AppDto GetApp(string appId);
+        public bool ValidateApp(string appId);
     }
 }

@@ -33,30 +33,51 @@ namespace ApiAppShop.Controllers
         [HttpPost("setapp")]
         public IActionResult Set(AddAppRequest addAppRequest)
         {
-            _appService.AddApp(_mapper.Map<AppDto>(addAppRequest));
-            return Ok();
+            try
+            {
+                _appService.AddApp(_mapper.Map<AppDto>(addAppRequest));
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("getapps")]
         public IActionResult Get()
         {
-            var apps = _appService.GetApps();
-            var response = new AppResponse()
+            try
             {
-                Apps = _mapper.Map<IEnumerable<App>>(apps)
-            };
-            return Ok(_mapper.Map<AppResponse>(response));
+                var apps = _appService.GetApps();
+                var response = new AppResponse()
+                {
+                    Apps = _mapper.Map<IEnumerable<App>>(apps)
+                };
+                return Ok(_mapper.Map<AppResponse>(response));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("getappsbyuser/{userid}")]
         public IActionResult GetByUser(string userid)
         {
-            var apps = _appService.GetAppsByUser(userid);
-            var response = new AppResponse()
+            try
             {
-                Apps = _mapper.Map<IEnumerable<App>>(apps)
-            };
-            return Ok(response);
+                var apps = _appService.GetAppsByUser(userid);
+                var response = new AppResponse()
+                {
+                    Apps = _mapper.Map<IEnumerable<App>>(apps)
+                };
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("purchase")]
@@ -74,6 +95,16 @@ namespace ApiAppShop.Controllers
         }
     }
 }
+/*
+{
+    "name": "Alberto Junior",
+    "cpf": "",
+    "birthDate": "1993-12-25T17:44:35.665Z",
+    "gender": 0,
+    "address": null,
+    "creditCard": null
+}
+*/
 
 /*
 {

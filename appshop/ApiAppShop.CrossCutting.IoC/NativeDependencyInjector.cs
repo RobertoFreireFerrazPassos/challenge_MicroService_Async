@@ -16,11 +16,13 @@ namespace ApiAppShop.CrossCutting.IoC
 		{
 			#region Services    
 				services.AddScoped<IAppService, AppService>();
-				services.AddScoped<IPurchaseService,PurchaseService>();			
+				services.AddScoped<IPurchaseService,PurchaseService>();
+				services.AddScoped<IUserService, UserService>();			
 			#endregion
 
 			#region Repositories    
 				services.AddScoped<IAppRepository, AppRepository>();
+				services.AddScoped<IUserRepository, UserRepository>();
 			#endregion
 
 			#region Events    
@@ -28,7 +30,7 @@ namespace ApiAppShop.CrossCutting.IoC
 			#endregion
 
 			#region Cache    
-			services.AddScoped<ICache, RedisCache>();
+				services.AddScoped<ICache, RedisCache>();
 			#endregion
 		}
 	}

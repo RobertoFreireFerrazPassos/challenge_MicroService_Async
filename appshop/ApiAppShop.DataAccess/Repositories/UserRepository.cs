@@ -3,7 +3,6 @@ using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
 using ApiAppShop.Repository;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
 
 namespace ApiAppShop.DataAccess.Repositories
 {

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using ApiAppShop.Domain.Repositories.Base;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Constants;
+using System;
 
 namespace ApiAppShop.Repository
 {
@@ -41,6 +42,7 @@ namespace ApiAppShop.Repository
 
         public void SetItem(T item)
         {
+            if (item.Id == null) item.Id = Guid.NewGuid().ToString();
             GetDatabase().GetCollection<T>(_document).InsertOne(item);
         }
     }
