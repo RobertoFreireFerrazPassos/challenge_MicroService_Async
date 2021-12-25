@@ -1,6 +1,11 @@
-﻿using ApiAppShop.Domain.Cache;
+﻿using ApiAppShop.Application.DataContracts.Requests.App;
+using ApiAppShop.Domain.Cache;
 using ApiAppShop.Domain.Dtos;
+using ApiAppShop.Domain.Entities;
+using ApiAppShop.Domain.Repositories;
 using ApiAppShop.Domain.Services;
+using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -10,11 +15,33 @@ namespace ApiAppShop.Application.Services
     public class AppService : IAppService
     {
         private readonly ICache _cache;
+        private readonly IAppRepository _appRepository;
+        private readonly IMapper _mapper;
+
         private readonly string appbyuser ="appsbyuser_";
 
-        public AppService(ICache cache)
+        public AppService(ICache cache,
+            IAppRepository appRepository,
+            IMapper mapper)
         {
-            _cache = cache;
+            _cache = cache ??
+                throw new ArgumentNullException(nameof(cache));
+            _appRepository = appRepository ??
+                throw new ArgumentNullException(nameof(appRepository));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
+        }
+
+        public void AddApp(AppDto addApp)
+        {
+            addApp.Id = Guid.NewGuid().ToString();
+            _appRepository.SetApp(_mapper.Map<AppEntity>(addApp));
+        }
+
+        public IEnumerable<AppDto> GetApps()
+        {
+            var apps = _mapper.Map<IEnumerable<AppDto>>(_appRepository.GetApps());
+            return apps;
         }
 
         public void AddAppByUser(AppCreationDto appCreationRequest)

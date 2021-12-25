@@ -7,5 +7,7 @@ namespace ApiAppShop.Domain.Services
     {
         public void AddAppByUser(AppCreationDto appCreationRequest);
         public IEnumerable<AppDto> GetAppsByUser(string userId);
+        public void AddApp(AppDto addAppRequest);
+        public IEnumerable<AppDto> GetApps();
     }
 }

@@ -1,4 +1,5 @@
-﻿using ApiAppShop.Domain.Dtos;
+﻿using ApiAppShop.Application.DataContracts.Requests.App;
+using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Services;
 using ApiUser.Application.DataContracts;
 using AutoMapper;
@@ -30,18 +31,21 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpPost("setapp")]
-        public IActionResult Set(AppCreationRequest appCreationRequest)
+        public IActionResult Set(AddAppRequest addAppRequest)
         {
-            _appService.AddAppByUser(_mapper.Map<AppCreationDto>(appCreationRequest));
+            _appService.AddApp(_mapper.Map<AppDto>(addAppRequest));
             return Ok();
         }
 
         [HttpGet("getapps")]
         public IActionResult Get()
         {
-            //var apps = _appService.Set();            
-            //return Ok(_mapper.Map<AppResponse>(apps));
-            return Ok();
+            var apps = _appService.GetApps();
+            var response = new AppResponse()
+            {
+                Apps = _mapper.Map<IEnumerable<App>>(apps)
+            };
+            return Ok(_mapper.Map<AppResponse>(response));
         }
 
         [HttpGet("getappsbyuser/{userid}")]
