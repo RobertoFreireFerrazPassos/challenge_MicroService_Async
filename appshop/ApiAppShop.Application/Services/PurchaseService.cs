@@ -3,6 +3,7 @@ using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Events;
 using ApiAppShop.Domain.Events.Producers;
 using ApiAppShop.Domain.Services;
+using ApiAppShop.Domain.ValueObjects;
 using AutoMapper;
 using System;
 using System.Threading.Tasks;
@@ -28,12 +29,12 @@ namespace ApiAppShop.Application.Services
         }
 
         public async Task PurchaseAsync(AppPurchaseDto appPurchase) {
-            if (appPurchase.SaveCreditCard) SaveCreditCard();
+            if (appPurchase.SaveCreditCard) SaveCreditCard(appPurchase.CreditCard);
             ValidateApp(appPurchase.AppId);
             await _appPurchasedProducer.Publish(_mapper.Map<AppPurchasedEvent>(appPurchase));
         }
 
-        private void SaveCreditCard() { 
+        private void SaveCreditCard(CreditCard creditCard) { 
             // Save Credit Card
         }
 

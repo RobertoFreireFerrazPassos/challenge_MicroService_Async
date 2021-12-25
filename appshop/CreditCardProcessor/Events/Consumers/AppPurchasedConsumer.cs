@@ -1,6 +1,7 @@
 ﻿using ApiAppShop.Domain.Events;
 using CreditCardProcessor.Events.Producers;
 using CreditCardProcessor.Services.Validation;
+using CreditCardProcessor.Utils;
 using MassTransit;
 using System;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace ApiAppShop.Domain.Consumers
 
         private void ValidateCreditCard(CreditCard creditCard, out bool validCreditCard) 
         {
-            string creditCardLast4Numbers = CreditCardValidator.GetCreditCardLast4Numbers(creditCard);
+            string creditCardLast4Numbers = CreditCardUtil.GetCreditCardLast4Numbers(creditCard);
             validCreditCard = CreditCardValidator.Validate(creditCard);
             PrintCreditCardValidatorMessage(validCreditCard, creditCardLast4Numbers);
         }
