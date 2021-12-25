@@ -1,4 +1,5 @@
-﻿using ApiAppShop.Domain.Dtos;
+﻿using ApiAppShop.Domain.Constants;
+using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Events;
 using ApiAppShop.Domain.Events.Producers;
 using ApiAppShop.Domain.Services;
@@ -28,12 +29,19 @@ namespace ApiAppShop.Application.Services
 
         public async Task PurchaseAsync(AppPurchaseDto appPurchase) {
             if (appPurchase.SaveCreditCard) SaveCreditCard();
-            _appService.AddAppByUser(_mapper.Map<AppCreationDto>(appPurchase));
+            ValidateApp(appPurchase.AppId);
             await _appPurchasedProducer.Publish(_mapper.Map<AppPurchasedEvent>(appPurchase));
         }
 
         private void SaveCreditCard() { 
             // Save Credit Card
+        }
+
+        private void ValidateApp(string appId)
+        {
+            var app = _appService.GetApp(appId);
+
+            if (app == null) throw new Exception(ErrorMessageConstants.APP_DOESNT_EXIST);
         }
     }
 }

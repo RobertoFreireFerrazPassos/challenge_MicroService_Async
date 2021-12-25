@@ -1,4 +1,5 @@
-﻿using ApiAppShop.Domain.Dtos;
+﻿using ApiAppShop.Domain.Constants;
+using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Events;
 using ApiAppShop.Domain.Services;
 using MassTransit;
@@ -19,21 +20,21 @@ namespace ApiAppShop.Domain.Consumers
         public async Task Consume(ConsumeContext<AppPurchasedStatusConfirmationEvent> context)
         {
             string message;
+
             if (context.Message.StatusConfirmation)
             {
-                message = $"Purchase made by user {context.Message.UserId} on app {context.Message.AppId}";
-                var newApp = new AppCreationDto()
+                message = String.Format(LogMessageConstants.PURCHASE_MADE_BY_USER_0_ON_APP_1,context.Message.UserId,context.Message.AppId);
+                var newApp = new AppPurchasedDto()
                 {
                     UserId = context.Message.UserId,
-                    Name = "Teste 2",
-                    Price = 4
+                    AppId = context.Message.AppId
                 };
-
+                
                 _appService.AddAppByUser(newApp);
             }
             else
             {
-                message = $"Purchase denied";
+                message = LogMessageConstants.PURCHASE_DENIED;
             }                
             
             Console.WriteLine(message);

@@ -2,9 +2,14 @@
   <img src="https://github.com/RobertoFreireFerrazPassos/challenge_MicroService_Async/blob/master/appshop/modelagem.png?raw=true">
 </p>
 
+
 RabbitMQ
 http://localhost:15672/
 username and password: guest / guest
+
+
+Swagger to test some endpoints
+http://localhost:9002/swagger/index.html
 
 
 Request to test docker, api gateway, api appshop, rabbitmq, masstransit and creditcard console app

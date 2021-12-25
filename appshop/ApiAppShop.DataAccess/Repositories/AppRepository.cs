@@ -1,4 +1,5 @@
-﻿using ApiAppShop.Domain.Entities;
+﻿using ApiAppShop.Domain.Constants;
+using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
 using ApiAppShop.Repository;
 using Microsoft.Extensions.Configuration;
@@ -8,8 +9,8 @@ namespace ApiAppShop.DataAccess.Repositories
 {
     public class AppRepository : Repository<AppEntity>, IAppRepository
     {
-        private static readonly string Table = "Apps";
-        public AppRepository(IConfiguration configuration) : base(configuration, Table)
+        private static readonly string Document = NoSqlDocumentConstants.APPS;
+        public AppRepository(IConfiguration configuration) : base(configuration, Document)
         {
         }
 

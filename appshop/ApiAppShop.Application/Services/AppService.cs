@@ -1,5 +1,6 @@
 ﻿using ApiAppShop.Application.DataContracts.Requests.App;
 using ApiAppShop.Domain.Cache;
+using ApiAppShop.Domain.Constants;
 using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
@@ -18,7 +19,7 @@ namespace ApiAppShop.Application.Services
         private readonly IAppRepository _appRepository;
         private readonly IMapper _mapper;
 
-        private readonly string appbyuser ="appsbyuser_";
+        private readonly string appbyuser = CacheKeyPrefixConstants.APP_BY_USER_;
 
         public AppService(ICache cache,
             IAppRepository appRepository,
@@ -44,17 +45,18 @@ namespace ApiAppShop.Application.Services
             return apps;
         }
 
-        public void AddAppByUser(AppCreationDto appCreationRequest)
+        public AppDto GetApp(string appId)
         {
-            var userId = appCreationRequest.UserId;
-            var Apps = GetAppsByUserInCache(userId).ToList();
-            var newApp = new AppDto
-            {
-                Name = appCreationRequest.Name,
-                Price = appCreationRequest.Price
-            };
+            return _mapper.Map<AppDto>(_appRepository.GetApp(appId));
+        }
 
-            if (Apps.Find(a => a.Name == newApp.Name) == null) Apps.Add(newApp);
+        public void AddAppByUser(AppPurchasedDto appPurchased)
+        {
+            var userId = appPurchased.UserId;
+            var Apps = GetAppsByUserInCache(userId).ToList();
+            var newPurchaseApp = GetApp(appPurchased.AppId);
+
+            if (Apps.Find(a => a.Id == newPurchaseApp.Id) == null) Apps.Add(newPurchaseApp);
 
             SetAppsByUserInCache(userId, Apps);
         }
