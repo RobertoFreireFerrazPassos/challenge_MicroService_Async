@@ -26,7 +26,6 @@
 
 7 - Add log messages structure 
 
-8 - Apps purchased by users are only in cache. Fix to save in database and update cache correctly
 
 ## Notes
 
@@ -40,6 +39,7 @@ In docker containers such as ApiAppShop.Presentation, it is possible to see the 
 ## Simple request to test docker, api gateway, api appshop, rabbitmq, masstransit and creditcard console app
 
 1 - Run docker compose on visual studio.
+
 note: set docker-compose as start up project
 
 2 - Import and run this request on Postman:
@@ -80,9 +80,11 @@ Endpoint ​/User​/SignIn
 ```
 
 Debug to find id just before persist data in mongodb
+
 ex: userId = d426d088-af6d-4207-80ec-20275a3aa0d1
 
 Or get userId accessing mongodb database directly
+
 See topic Access Mongodb Container data.
 
 2 - Test user created
@@ -130,6 +132,7 @@ Endpoint /App/purchase
 Endpoint /App/getappsbyuser/{userid}
 
 7 - Redo test 2 (Test user created)
+
 it must have the creditcard new information provided durind app purchase
 
 ## Access Mongodb Container data
@@ -150,7 +153,9 @@ db.Users.find()
 
 
 3 - Get _id 
+
 ex:
+
 { "_id" : "d2f1a07c-e503-49a4-bae3-dd2055dd502a", "Name" : "Alberto Junior", "Cpf" : "", "BirthDate" : ISODate("1993-12-25T17:44:35.665Z"), "Gender" : 0, "CreditCard" : null, "Address" : null }
 
 

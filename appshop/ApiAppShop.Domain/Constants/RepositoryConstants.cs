@@ -6,5 +6,6 @@
         public static string NO_SQL_CONECTION = "ConexaoNoSql";
         public static string DB = "DB";
         public static string ID = "Id";
+        public static string USERID = "UserId";        
     }
 }

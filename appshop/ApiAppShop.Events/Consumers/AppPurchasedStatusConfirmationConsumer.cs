@@ -17,7 +17,7 @@ namespace ApiAppShop.Domain.Consumers
             _appService = appService;
         }
 
-        public async Task Consume(ConsumeContext<AppPurchasedStatusConfirmationEvent> context)
+        public Task Consume(ConsumeContext<AppPurchasedStatusConfirmationEvent> context)
         {
             string message;
 
@@ -38,6 +38,7 @@ namespace ApiAppShop.Domain.Consumers
             }                
             
             Console.WriteLine(message);
+            return Task.CompletedTask;
         }
     }
 }

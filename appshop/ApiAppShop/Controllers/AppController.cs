@@ -67,7 +67,8 @@ namespace ApiAppShop.Controllers
         {
             try
             {
-                var apps = _appService.GetAppsByUser(userid);
+                bool areAppsbyUserFromDatabase = false;
+                var apps = _appService.GetAppsByUser(userid, out areAppsbyUserFromDatabase);
                 var response = new AppResponse()
                 {
                     Apps = _mapper.Map<IEnumerable<App>>(apps)

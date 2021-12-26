@@ -36,6 +36,12 @@ namespace ApiAppShop.Repository
             return GetCollection().Find(filter).FirstOrDefault();
         }
 
+        public T GetItemByCustomStringFilter(string field, string value)
+        {            
+            var filter = CustomStringFilter(field, value);
+            return GetCollection().Find(filter).FirstOrDefault();
+        }
+
         public IEnumerable<T> GetItems()
         {
             return GetCollection().Find(_ => true).ToList();
@@ -58,13 +64,18 @@ namespace ApiAppShop.Repository
         public void SetItem(T item)
         {
             string id = item.Id;
-            var filter = IdFilter(id);
             item.Id = id ?? Guid.NewGuid().ToString();
             GetCollection().InsertOne(item);
         }
+
         private FilterDefinition<T> IdFilter(string id) 
         {
             return Builders<T>.Filter.Eq(RepositoryConstants.ID, id);
+        }
+
+        private FilterDefinition<T> CustomStringFilter(string field, string value)
+        {
+            return Builders<T>.Filter.Eq(field, value);
         }
 
         private IMongoCollection<T> GetCollection() 
