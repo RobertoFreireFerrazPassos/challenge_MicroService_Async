@@ -36,13 +36,15 @@ username and password: guest / guest
 In docker containers such as ApiAppShop.Presentation, it is possible to see the console messages
 
 
-## Simple request to test docker, api gateway, api appshop, rabbitmq, masstransit and creditcard console app
+## Simple request to test docker, api gateway using ocelot, api appshop, cache using redis, rabbitmq, masstransit and creditcard console app
 
 1 - Run docker compose on visual studio.
 
 note: set docker-compose as start up project
 
-2 - Import and run this request on Postman:
+2 - Import and run request on Postman:
+
+example:
 
 curl --location --request POST 'http://localhost:9001/purchase' \
 --header 'accept: */*' \
