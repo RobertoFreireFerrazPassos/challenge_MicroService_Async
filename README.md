@@ -36,32 +36,6 @@ username and password: guest / guest
 In docker containers such as ApiAppShop.Presentation, it is possible to see the console messages
 
 
-## Simple request to test docker, api gateway using ocelot, api appshop, cache using redis, rabbitmq, masstransit and creditcard console app
-
-1 - Run docker compose on visual studio.
-
-note: set docker-compose as start up project
-
-2 - Import and run request on Postman:
-
-example:
-
-curl --location --request POST 'http://localhost:9001/purchase' \
---header 'accept: */*' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "appId": "d24a3c0d-117a-4637-a078-2d386d7a6952",
-    "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
-    "saveCreditCard": true,
-    "creditCard": {
-        "name": "Adalto Jarbas Lopes",
-        "number": "5496374407457455",
-        "cvv": "123",
-        "expirationDateMMYYYY": "122025"
-    }
-}'
-
-
 ## Steps to complete test using swagger 
 
 (http://localhost:9002/swagger/index.html)
@@ -161,4 +135,27 @@ ex:
 { "_id" : "d2f1a07c-e503-49a4-bae3-dd2055dd502a", "Name" : "Alberto Junior", "Cpf" : "", "BirthDate" : ISODate("1993-12-25T17:44:35.665Z"), "Gender" : 0, "CreditCard" : null, "Address" : null }
 
 
+## Simple request to test docker, api gateway using ocelot, api appshop, cache using redis, rabbitmq, masstransit and creditcard console app
 
+1 - Run docker compose on visual studio.
+
+note: set docker-compose as start up project
+
+2 - Import and run request on Postman:
+
+example:
+
+curl --location --request POST 'http://localhost:9001/purchase' \
+--header 'accept: */*' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "appId": "d24a3c0d-117a-4637-a078-2d386d7a6952",
+    "userId": "8f681848-75c5-4c09-8b01-62ab2713b2b2",
+    "saveCreditCard": true,
+    "creditCard": {
+        "name": "Adalto Jarbas Lopes",
+        "number": "5496374407457455",
+        "cvv": "123",
+        "expirationDateMMYYYY": "122025"
+    }
+}'
