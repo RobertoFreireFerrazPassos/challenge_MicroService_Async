@@ -1,9 +1,8 @@
 using ConsoleCreditCardProcessor.Tests.Builders.CreditCard;
-using CreditCardProcessor.Services.Validation;
 using CreditCardProcessor.Utils;
+using FluentAssertions;
 using System.Collections.Generic;
 using Xunit;
-using ValueObjects = ApiAppShop.Domain.ValueObjects;
 
 namespace ConsoleCreditCardProcessor.Tests
 {
@@ -23,11 +22,11 @@ namespace ConsoleCreditCardProcessor.Tests
 
         [Theory]
         [MemberData(nameof(CreditCardData))]
-        public void MustGetCreditCardLast4Numbers(CreditCardImpl creditCard)
+        public void When_GetCreditCardLast4Numbers_Must_HaveLengthOfFour(CreditCardImpl creditCard)
         {
-            string creditCardLast4Numbers = CreditCardUtil.GetCreditCardLast4Numbers(creditCard);
+            var result = CreditCardUtil.GetCreditCardLast4Numbers(creditCard);
 
-            Assert.True(creditCardLast4Numbers.Length == 4);
+            result.Should().HaveLength(4);
         }
     }
 }
