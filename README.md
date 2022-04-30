@@ -20,11 +20,21 @@
 
 4 - Create Authorization with token
 
-5 - Insert Observer Design Pattern to listen to consumed events 
+5 - Add log messages structure 
 
-6 - Add log messages structure 
+6 - Change Services and Repositories Methods to Async
 
-7 - Change Services and Repositories Methods to Async
+7 - Handling Failures
+
+Failures cases:
+
+--> between AppShop Api and RabbitMq
+
+--> between Credit Card Processor and RabbitMq
+
+Strategies: [1] Strategies to handle partial failure
+
+8 - Test all cases of problems using Cache
 
 
 ## Notes
@@ -159,3 +169,9 @@ curl --location --request POST 'http://localhost:9001/purchase' \
         "expirationDateMMYYYY": "122025"
     }
 }'
+
+## References:
+
+[1] Strategies to handle partial failure:
+
+https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/partial-failure-strategies
