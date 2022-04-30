@@ -109,7 +109,7 @@ Endpoint /App/getappsbyuser/{userid}
 
 7 - Redo test 2 (Test user created)
 
-it must have the creditcard new information provided durind app purchase
+it must have the creditcard new information provided during app purchase
 
 ## Access Mongodb Container data
 

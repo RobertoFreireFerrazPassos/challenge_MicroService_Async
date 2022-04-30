@@ -68,7 +68,9 @@ namespace ApiAppShop.Application.Services
 
         public IEnumerable<AppDto> GetAppsByUser(string userId)
         {
-            return _mapper.Map<IEnumerable<AppDto>>(_userAccountDomainService.Get(userId).Apps);
+            var apps = _userAccountDomainService.Get(userId)?.Apps;
+
+            return apps is null ? default(IEnumerable<AppDto>) : _mapper.Map<IEnumerable<AppDto>>(apps);
         }
 
         public void AddAppInUserAccount(AppPurchasedDto appPurchased)

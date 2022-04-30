@@ -1,7 +1,6 @@
 ﻿using ApiAppShop.Domain.DomainServices;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
-using AutoMapper;
 using System;
 using System.Collections.Generic;
 
