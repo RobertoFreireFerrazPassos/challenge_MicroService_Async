@@ -22,9 +22,9 @@
 
 5 - Insert Observer Design Pattern to listen to consumed events 
 
-6 - Add cache also for list of all apps
+6 - Add log messages structure 
 
-7 - Add log messages structure 
+7 - Change Services and Repositories Methods to Async
 
 
 ## Notes

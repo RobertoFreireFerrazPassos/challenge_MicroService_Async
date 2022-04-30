@@ -6,24 +6,24 @@ using Microsoft.Extensions.Configuration;
 
 namespace ApiAppShop.DataAccess.Repositories
 {
-    public class AppsByUserRepository : Repository<AppsByUserEntity>, IAppsByUserRepository
+    public class UserAccountRepository : Repository<UserAccountEntity>, IUserAccountRepository
     {
         private static readonly string Document = NoSqlDocumentConstants.APPSBYUSER;
-        public AppsByUserRepository(IConfiguration configuration) : base(configuration, Document)
+        public UserAccountRepository(IConfiguration configuration) : base(configuration, Document)
         {
         }
 
-        public void SetAppsByUser(AppsByUserEntity item)
+        public void Set(UserAccountEntity item)
         {
             SetItem(item);
         }
 
-        public void ReplaceUser(AppsByUserEntity item)
+        public void Replace(UserAccountEntity item)
         {
             ReplaceItem(item);
         }
 
-        public AppsByUserEntity GetAppsByUserId(string userId)
+        public UserAccountEntity Get(string userId)
         {
             return GetItemByCustomStringFilter(RepositoryConstants.USERID, userId);
         }

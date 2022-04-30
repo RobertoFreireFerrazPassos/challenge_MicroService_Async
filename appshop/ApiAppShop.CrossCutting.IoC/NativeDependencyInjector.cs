@@ -23,7 +23,7 @@ namespace ApiAppShop.CrossCutting.IoC
 			#region Repositories    
 				services.AddScoped<IAppRepository, AppRepository>();
 				services.AddScoped<IUserRepository, UserRepository>();
-				services.AddScoped<IAppsByUserRepository, AppsByUserRepository>();			
+				services.AddScoped<IUserAccountRepository, UserAccountRepository>();			
 			#endregion
 
 			#region Events    
