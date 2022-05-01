@@ -20,6 +20,7 @@
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 cfg.Host(configuration.GetConnectionString("RabbitMq"));
+
                 RegisterReceiveEndpoints(cfg);                
             });
 
@@ -28,6 +29,7 @@
             var source = new CancellationTokenSource(TimeSpan.FromSeconds(10));
 
             await busControl.StartAsync(source.Token);
+
             try
             {
                 Console.WriteLine("Press enter to exit");

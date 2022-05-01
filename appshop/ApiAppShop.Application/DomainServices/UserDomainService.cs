@@ -1,9 +1,7 @@
 ﻿using ApiAppShop.Domain.Constants;
 using ApiAppShop.Domain.DomainServices;
-using ApiAppShop.Domain.Dtos.User;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
-using AutoMapper;
 using System;
 
 namespace ApiAppShop.Application.DomainServices
@@ -11,39 +9,41 @@ namespace ApiAppShop.Application.DomainServices
     public class UserDomainService : IUserDomainService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
 
-        public UserDomainService(IUserRepository userRepository,
-            IMapper mapper)
+        public UserDomainService(IUserRepository userRepository)
         {
             _userRepository = userRepository ??
                 throw new ArgumentNullException(nameof(userRepository));
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
         }
 
-        public UserEntity GetUser(string userId)
+        public UserEntity GetUserById(string userId)
         {
             return _userRepository.GetUser(userId);
         }
 
-        public void SetUser(UserDto user)
+        public UserEntity GetUserByName(string name)
         {
-            string userId = user.Id;
+            return _userRepository.GetUserByName(name);
+        }        
 
-            if (IsNewUser(userId))
+        public void CreateNewUser(UserEntity user)
+        {
+            if (!IsNewUser(user.Id))
             {
-                _userRepository.SetUser(_mapper.Map<UserEntity>(user));
+                throw new Exception(String.Format(ErrorMessageConstants.NOT_A_NEW_USER,user.Id));
             }
-            else
-            {
-                _userRepository.ReplaceUser(_mapper.Map<UserEntity>(user));
-            }
+
+            _userRepository.SetUser(user);
 
             bool IsNewUser(string userId)
             {
-                return string.IsNullOrEmpty(userId) || GetUser(userId) is null;
+                return string.IsNullOrEmpty(userId);
             }
+        }
+
+        public void UpdateUser(UserEntity user)
+        {
+            _userRepository.ReplaceUser(user);
         }
     }
 }

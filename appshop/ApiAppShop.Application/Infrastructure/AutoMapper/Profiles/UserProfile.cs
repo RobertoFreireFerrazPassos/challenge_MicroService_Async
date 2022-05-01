@@ -10,9 +10,11 @@ namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles
     {
         public UserProfile()
         {
-            CreateMap<UserEntity,UserDto>().ReverseMap();
+            CreateMap<UserEntity,UserDto>()
+                .ReverseMap();
             CreateMap<SignInRequest, UserDto>();
-            CreateMap<UserDto, LogInResponse>();            
+            CreateMap<UserDto, LogInResponse>();   
+            CreateMap<LogInRequest, LogInDto>();
         }
     }
 }

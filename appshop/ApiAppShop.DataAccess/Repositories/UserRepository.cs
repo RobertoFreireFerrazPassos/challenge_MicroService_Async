@@ -9,14 +9,18 @@ namespace ApiAppShop.DataAccess.Repositories
     public class UserRepository : Repository<UserEntity>, IUserRepository
     {
         private static readonly string Document = NoSqlDocumentConstants.USERS;
-        public UserRepository(IConfiguration configuration) : base(configuration, Document)
-        {
-        }
+
+        public UserRepository(IConfiguration configuration) : base(configuration, Document) { }
 
         public UserEntity GetUser(string id)
         {
             return GetItem(id);
         }
+
+        public UserEntity GetUserByName(string name)
+        {
+            return GetItemByCustomStringFilter("Name", name);
+        }        
 
         public void SetUser(UserEntity item)
         {

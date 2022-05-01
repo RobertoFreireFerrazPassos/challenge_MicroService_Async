@@ -58,24 +58,19 @@ Endpoint ​/User​/SignIn
 {
     "name": "Alberto Junior",
     "cpf": "",
+    "Password" : "123456",
     "birthDate": "1993-12-25T17:44:35.665Z",
-    "gender": 0,
+    "gender": 2,
     "address": null,
     "creditCard": null
 }
 ```
 
-Debug to find id just before persist data in mongodb
-
-ex: userId = d426d088-af6d-4207-80ec-20275a3aa0d1
-
-Or get userId accessing mongodb database directly
-
-See topic Access Mongodb Container data.
+To see user created in database, see topic Access Mongodb Container data.
 
 2 - Test user created
 
-Endpoint /User/LogIn/{userId}
+Endpoint /Auth/LogIn
 
 3 - Create App
 
@@ -142,7 +137,7 @@ db.Users.find()
 
 ex:
 
-{ "_id" : "d2f1a07c-e503-49a4-bae3-dd2055dd502a", "Name" : "Alberto Junior", "Cpf" : "", "BirthDate" : ISODate("1993-12-25T17:44:35.665Z"), "Gender" : 0, "CreditCard" : null, "Address" : null }
+{ "_id" : "d2f1a07c-e503-49a4-bae3-dd2055dd502a", "Name" : "Alberto Junior", "Cpf" : "", "BirthDate" : ISODate("1993-12-25T17:44:35.665Z"), "Gender" : 2, "CreditCard" : null, "Address" : null }
 
 
 ## Simple request to test docker, api gateway using ocelot, api appshop, cache using redis, rabbitmq, masstransit and creditcard console app

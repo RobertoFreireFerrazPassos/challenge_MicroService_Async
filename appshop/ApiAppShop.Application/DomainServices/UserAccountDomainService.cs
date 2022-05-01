@@ -13,8 +13,6 @@ namespace ApiAppShop.Application.DomainServices
 {
     public class UserAccountDomainService : IUserAccountDomainService
     {
-        private readonly IMapper _mapper;
-
         private readonly ICache _cache;
 
         private readonly IUserAccountRepository _userAccountRepository;
@@ -23,14 +21,11 @@ namespace ApiAppShop.Application.DomainServices
 
         public UserAccountDomainService(
             IUserAccountRepository userAccountRepository,
-            IMapper mapper,
             ICache cache
             ) 
         {
             _userAccountRepository = userAccountRepository ??
                 throw new ArgumentNullException(nameof(userAccountRepository));
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
             _cache = cache ??
                 throw new ArgumentNullException(nameof(cache));
         }
@@ -65,14 +60,14 @@ namespace ApiAppShop.Application.DomainServices
 
         public void Update(UserAccountEntity userAccount)
         {
-            _userAccountRepository.Replace(_mapper.Map<UserAccountEntity>(userAccount));
+            _userAccountRepository.Replace(userAccount);
 
             SetUserAccountInCache(userAccount);
         }
 
         public void Create(UserAccountEntity userAccount)
         {
-            _userAccountRepository.Set(_mapper.Map<UserAccountEntity>(userAccount));
+            _userAccountRepository.Set(userAccount);
 
             SetUserAccountInCache(userAccount);
         }

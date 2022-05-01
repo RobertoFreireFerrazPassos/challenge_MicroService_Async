@@ -9,16 +9,16 @@ namespace ApiAppShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
-        private IUserService _userService;
+        private IAuthService _authService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService,
+        public AuthController(IAuthService authService,
             IMapper mapper)
         {
-            _userService = userService ??
-                throw new ArgumentNullException(nameof(userService));
+            _authService = authService ??
+                throw new ArgumentNullException(nameof(authService));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
         }
@@ -41,7 +41,8 @@ namespace ApiAppShop.Controllers
         {
             try
             {
-                _userService.SetUser(_mapper.Map<UserDto>(signInRequest));
+                _authService.CreateNewUser(_mapper.Map<UserDto>(signInRequest));
+
                 return Ok();
             }
             catch (Exception ex)
@@ -50,12 +51,12 @@ namespace ApiAppShop.Controllers
             }
         }
 
-        [HttpGet("LogIn/{userId}")]
-        public IActionResult LogIn(string userId)
+        [HttpPost("LogIn")]
+        public IActionResult LogIn(LogInRequest signInRequest)
         {
             try
             {
-                return Ok(_userService.GetUser(userId));
+                return Ok(_authService.LogIn(_mapper.Map<LogInDto>(signInRequest)));
             }
             catch (Exception ex)
             {

@@ -1,8 +1,8 @@
-﻿namespace ApiUser.Domain.Enums
+﻿namespace ApiAppShop.Domain.Enums
 {
     public enum GenderEnum
     {
-        Male,
-        Female
+        Female = 1,
+        Male
     }
 }
