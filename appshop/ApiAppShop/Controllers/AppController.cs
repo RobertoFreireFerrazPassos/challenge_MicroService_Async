@@ -1,8 +1,10 @@
 ﻿using ApiAppShop.Application.DataContracts.Requests.App;
+using ApiAppShop.Domain.Constants;
 using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Services;
 using ApiUser.Application.DataContracts;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ApiAppShop.Controllers
 {
-    [ApiController]
+    [ApiController, Authorize(Roles = UserRoleConstants.Guest)]
     [Route("[controller]")]
     public class AppController : ControllerBase
     {

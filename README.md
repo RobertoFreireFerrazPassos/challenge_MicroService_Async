@@ -72,6 +72,13 @@ To see user created in database, see topic Access Mongodb Container data.
 
 Endpoint /Auth/LogIn
 
+```json
+{
+  "name": "Alberto Junior",
+  "password": "123456"
+}
+```
+
 3 - Create App
 
 Endpoint /App/setapp

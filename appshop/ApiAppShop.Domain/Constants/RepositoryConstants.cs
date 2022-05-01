@@ -2,14 +2,14 @@
 {
     public static class RepositoryConstants
     {
-        public static string APPS = "Apps";
+        public const string APPS = "Apps";
 
-        public static string NO_SQL_CONECTION = "ConexaoNoSql";
+        public const string NO_SQL_CONECTION = "ConexaoNoSql";
 
-        public static string DB = "DB";
+        public const string DB = "DB";
 
-        public static string ID = "Id";
+        public const string ID = "Id";
 
-        public static string USERID = "UserId";        
+        public const string USERID = "UserId";        
     }
 }

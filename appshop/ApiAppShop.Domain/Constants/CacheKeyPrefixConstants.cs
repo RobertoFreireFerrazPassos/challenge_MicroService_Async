@@ -2,6 +2,6 @@
 {
     public static class CacheKeyPrefixConstants
     {
-        public static string APP_BY_USER_ = "appsbyuser_";
+        public const string APP_BY_USER_ = "appsbyuser_";
     }
 }
