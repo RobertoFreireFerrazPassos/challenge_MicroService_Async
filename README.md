@@ -14,26 +14,13 @@
 
 1 - Fix Api Gateway to point all endpoints correctly
 
-2 - Create more tests
+2 - Create more tests with mocks
 
-3 - Create Credit Card Validation 
+3 - Add log messages structure 
 
-4 - Add log messages structure 
+4 - For update or insert in Cache and Database, add roll back logic if either one fails
 
-5 - Change Services and Repositories Methods to Async
-
-6 - Handling Failures
-
-Failures cases:
-
---> between AppShop Api and RabbitMq
-
---> between Credit Card Processor and RabbitMq
-
-Reference: [1] Strategies to handle partial failure
-
-7 - Test all cases of problems using Cache
-
+5 - Add Fluent validation
 
 ## Notes
 
