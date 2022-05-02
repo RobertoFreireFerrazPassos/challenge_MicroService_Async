@@ -1,12 +1,13 @@
 ﻿using ApiAppShop.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.Repositories
 {
     public interface IAppRepository
     {
-        public AppEntity GetApp(string id);
-        public IEnumerable<AppEntity> GetApps();
-        public void SetApp(AppEntity item);
+        public Task<AppEntity> GetAppAsync(string id);
+        public Task<IEnumerable<AppEntity>> GetAppsAsync();
+        public Task SetAppAsync(AppEntity item);
     }
 }

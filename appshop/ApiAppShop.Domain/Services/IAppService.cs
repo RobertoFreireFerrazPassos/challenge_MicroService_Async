@@ -1,12 +1,13 @@
 ﻿using ApiAppShop.Domain.Dtos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.Services
 {
     public interface IAppService
     {
-        public void AddApp(AppDto addAppRequest);
-        public IEnumerable<AppDto> GetApps();
-        public AppDto GetApp(string appId);
+        public Task AddAppAsync(AppDto addAppRequest);
+        public Task<IEnumerable<AppDto>> GetAppsAsync();
+        public Task<AppDto> GetAppAsync(string appId);
     }
 }

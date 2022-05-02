@@ -6,6 +6,7 @@ using ApiAppShop.Domain.Repositories.Base;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Constants;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Repository
 {
@@ -34,50 +35,50 @@ namespace ApiAppShop.Repository
             return client.GetDatabase(Db);
         }
 
-        public T GetItem(string id) 
+        public async Task<T> GetItemAsync(string id) 
         {
             var filter = IdFilter(id);
 
-            return GetCollection().Find(filter).FirstOrDefault();
+            return await GetCollection().Find(filter).FirstOrDefaultAsync();
         }
 
-        public T GetItemByCustomStringFilter(string field, string value)
+        public async Task<T> GetItemByCustomStringFilterAsync(string field, string value)
         {            
             var filter = CustomStringFilter(field, value);
 
-            return GetCollection().Find(filter).FirstOrDefault();
+            return await GetCollection().Find(filter).FirstOrDefaultAsync();
         }
 
-        public IEnumerable<T> GetItems()
+        public async Task<IEnumerable<T>> GetItemsAsync()
         {
-            return GetCollection().Find(_ => true).ToList();
+            return await GetCollection().Find(_ => true).ToListAsync();
         }
 
-        public void UpdateItem(string itemId, string field, object value)
+        public async Task UpdateItemAsync(string itemId, string field, object value)
         {
             var filter = IdFilter(itemId);
 
             var update = Builders<T>.Update.Set(field, value);
 
-            GetCollection().UpdateOne(filter, update);
+            await GetCollection().UpdateOneAsync(filter, update);
         }
 
-        public void ReplaceItem(T item)
+        public async Task ReplaceItemAsync(T item)
         {
             string itemId = item.Id;
 
             var filter = IdFilter(itemId);
 
-            GetCollection().ReplaceOne(filter, item);
+            await GetCollection().ReplaceOneAsync(filter, item);
         }
 
-        public void SetItem(T item)
+        public async Task SetItemAsync(T item)
         {
             string id = item.Id;
 
             item.Id = id ?? Guid.NewGuid().ToString();
 
-            GetCollection().InsertOne(item);
+            await GetCollection().InsertOneAsync(item);
         }
 
         private FilterDefinition<T> IdFilter(string id) 

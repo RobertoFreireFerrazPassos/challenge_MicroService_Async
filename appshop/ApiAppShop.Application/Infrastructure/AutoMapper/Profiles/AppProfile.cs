@@ -12,8 +12,11 @@ namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles
         public AppProfile()
         {
             CreateMap<AppDto,App>();
+
             CreateMap<AddAppRequest, AppDto>();
+
             CreateMap<AppEntity, AppDto>().ReverseMap();
+
             CreateMap<UserAccountEntity, UserAccountDto>().ReverseMap();            
         }
     }

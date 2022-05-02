@@ -33,11 +33,12 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpPost("setapp")]
-        public IActionResult Set(AddAppRequest addAppRequest)
+        public async Task<IActionResult> SetAsync(AddAppRequest addAppRequest)
         {
             try
             {
-                _appService.AddApp(_mapper.Map<AppDto>(addAppRequest));
+                await _appService.AddAppAsync(_mapper.Map<AppDto>(addAppRequest));
+
                 return Ok();
             }
             catch (Exception ex)
@@ -47,11 +48,11 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpGet("getapps")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var apps = _appService.GetApps();
+                var apps = await _appService.GetAppsAsync();
                 var response = new AppResponse()
                 {
                     Apps = _mapper.Map<IEnumerable<App>>(apps)
@@ -65,11 +66,11 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpGet("getappsbyuser/{userid}")]
-        public IActionResult GetByUser(string userid)
+        public async Task<IActionResult> GetByUser(string userid)
         {
             try
             {
-                var apps = _purchaseService.GetAppsByUser(userid);                
+                var apps = await _purchaseService.GetAppsByUserAsync(userid);                
 
                 var response = new AppResponse()
                 {
@@ -89,6 +90,7 @@ namespace ApiAppShop.Controllers
             try
             {
                 await _purchaseService.PurchaseAsync(_mapper.Map<AppPurchaseDto>(purchaseRequest));
+
                 return Ok();
             }
             catch (Exception ex)

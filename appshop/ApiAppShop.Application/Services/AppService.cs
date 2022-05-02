@@ -6,6 +6,7 @@ using ApiAppShop.Domain.Services;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Application.Services
 {
@@ -25,21 +26,21 @@ namespace ApiAppShop.Application.Services
                 throw new ArgumentNullException(nameof(mapper));            
         }
 
-        public void AddApp(AppDto addApp)
+        public async Task AddAppAsync(AppDto addApp)
         {
-            _appDomainService.AddApp(_mapper.Map<AppEntity>(addApp));
+            await _appDomainService.AddAppAsync(_mapper.Map<AppEntity>(addApp));
         }
 
-        public IEnumerable<AppDto> GetApps()
+        public async Task<IEnumerable<AppDto>> GetAppsAsync()
         {
-            var apps = _mapper.Map<IEnumerable<AppDto>>(_appDomainService.GetApps());
+            var apps = _mapper.Map<IEnumerable<AppDto>>(await _appDomainService.GetAppsAsync());
 
             return apps;
         }
 
-        public AppDto GetApp(string appId)
+        public async Task<AppDto> GetAppAsync(string appId)
         {
-            var app = _appDomainService.GetApp(appId);
+            var app = await _appDomainService.GetAppAsync(appId);
 
             if (app == null) throw new Exception(ErrorMessageConstants.APP_DOESNT_EXIST);
 

@@ -4,6 +4,7 @@ using ApiAppShop.Domain.Repositories;
 using ApiAppShop.Repository;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.DataAccess.Repositories
 {
@@ -14,19 +15,19 @@ namespace ApiAppShop.DataAccess.Repositories
         {
         }
 
-        public AppEntity GetApp(string id)
+        public async Task<AppEntity> GetAppAsync(string id)
         {
-            return GetItem(id);
+            return await GetItemAsync(id);
         }
 
-        public IEnumerable<AppEntity> GetApps()
+        public async Task<IEnumerable<AppEntity>> GetAppsAsync()
         {
-            return GetItems();
+            return await GetItemsAsync();
         }
 
-        public void SetApp(AppEntity item)
+        public async Task SetAppAsync(AppEntity item)
         {
-            SetItem(item);
+            await SetItemAsync(item);
         }
     }
 }

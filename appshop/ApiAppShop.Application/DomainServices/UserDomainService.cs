@@ -3,6 +3,7 @@ using ApiAppShop.Domain.DomainServices;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Application.DomainServices
 {
@@ -16,24 +17,24 @@ namespace ApiAppShop.Application.DomainServices
                 throw new ArgumentNullException(nameof(userRepository));
         }
 
-        public UserEntity GetUserById(string userId)
+        public async Task<UserEntity> GetUserByIdAsync(string userId)
         {
-            return _userRepository.GetUser(userId);
+            return await _userRepository.GetUserAsync(userId);
         }
 
-        public UserEntity GetUserByName(string name)
+        public async Task<UserEntity> GetUserByNameAsync(string name)
         {
-            return _userRepository.GetUserByName(name);
+            return await _userRepository.GetUserByNameAsync(name);
         }        
 
-        public void CreateNewUser(UserEntity user)
+        public async Task CreateNewUserAsync(UserEntity user)
         {
             if (!IsNewUser(user.Id))
             {
                 throw new Exception(String.Format(ErrorMessageConstants.NOT_A_NEW_USER,user.Id));
             }
 
-            _userRepository.SetUser(user);
+            await _userRepository.SetUserAsync(user);
 
             bool IsNewUser(string userId)
             {
@@ -41,9 +42,9 @@ namespace ApiAppShop.Application.DomainServices
             }
         }
 
-        public void UpdateUser(UserEntity user)
+        public async Task UpdateUserAsync(UserEntity user)
         {
-            _userRepository.ReplaceUser(user);
+            await _userRepository.ReplaceUserAsync(user);
         }
     }
 }

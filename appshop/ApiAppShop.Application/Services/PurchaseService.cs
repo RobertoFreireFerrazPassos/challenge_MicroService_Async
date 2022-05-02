@@ -43,17 +43,17 @@ namespace ApiAppShop.Application.Services
         }
 
         public async Task PurchaseAsync(AppPurchaseDto appPurchase) {
-            var app = _appService.GetApp(appPurchase.AppId);
+            var app = await _appService.GetAppAsync(appPurchase.AppId);
 
             appPurchase.AppId = app.Id;
 
-            var user = _userService.GetUser(appPurchase.UserId);
+            var user = await _userService.GetUserAsync(appPurchase.UserId);
 
-            UpdateUser();
+            await UpdateUserAsync();
 
             await _appPurchasedProducer.Publish(_mapper.Map<AppPurchasedEvent>(appPurchase));
 
-            void UpdateUser()
+            async Task UpdateUserAsync()
             {
                 if (!appPurchase.SaveCreditCard)
                 {
@@ -62,26 +62,26 @@ namespace ApiAppShop.Application.Services
                     
                 user.CreditCard = appPurchase.CreditCard;
 
-                _userService.SetUser(user);
+                await _userService.SetUserAsync(user);
             }
         }
 
-        public IEnumerable<AppDto> GetAppsByUser(string userId)
+        public async Task<IEnumerable<AppDto>> GetAppsByUserAsync(string userId)
         {
-            var apps = _userAccountDomainService.Get(userId)?.Apps;
+            var apps = (await _userAccountDomainService.GetAsync(userId))?.Apps;
 
             return apps is null ? default(IEnumerable<AppDto>) : _mapper.Map<IEnumerable<AppDto>>(apps);
         }
 
-        public void AddAppInUserAccount(AppPurchasedDto appPurchased)
+        public async Task AddAppInUserAccountAsync(AppPurchasedDto appPurchased)
         {
-            var newPurchaseApp = _appService.GetApp(appPurchased.AppId);
+            var newPurchaseApp = await _appService.GetAppAsync(appPurchased.AppId);
 
-            var userAccount = _userAccountDomainService.Get(appPurchased.UserId);
+            var userAccount = await _userAccountDomainService.GetAsync(appPurchased.UserId);
 
             if (userAccount is null)
             {
-                CreateNewUserAccount(appPurchased.UserId, newPurchaseApp);
+                await CreateNewUserAccountAsync(appPurchased.UserId, newPurchaseApp);
                 return;
             }
 
@@ -90,9 +90,9 @@ namespace ApiAppShop.Application.Services
                 return;
             }
 
-            UpdateUserAccount(userAccount, newPurchaseApp);
+            await UpdateUserAccountAsync(userAccount, newPurchaseApp);
 
-            void CreateNewUserAccount(string userId, AppDto newPurchaseApp)
+            async Task CreateNewUserAccountAsync(string userId, AppDto newPurchaseApp)
             {
                 userAccount = new UserAccountEntity()
                 {
@@ -100,10 +100,10 @@ namespace ApiAppShop.Application.Services
                     Apps = new List<AppEntity>() { _mapper.Map<AppEntity>(newPurchaseApp) }
                 };
 
-                _userAccountDomainService.Create(userAccount);
+                await _userAccountDomainService.CreateAsync(userAccount);
             }
 
-            void UpdateUserAccount(UserAccountEntity userAccount, AppDto newPurchaseApp)
+            async Task UpdateUserAccountAsync(UserAccountEntity userAccount, AppDto newPurchaseApp)
             {
                 var apps = userAccount.Apps.ToList();
 
@@ -111,7 +111,7 @@ namespace ApiAppShop.Application.Services
 
                 userAccount.Apps = apps;
 
-                _userAccountDomainService.Update(userAccount);
+                await _userAccountDomainService.UpdateAsync(userAccount);
             }
         }
     }

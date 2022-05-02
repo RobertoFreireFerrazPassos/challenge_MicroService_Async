@@ -5,6 +5,7 @@ using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Services;
 using AutoMapper;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Application.Services
 {
@@ -23,9 +24,9 @@ namespace ApiAppShop.Application.Services
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        public UserDto GetUser(string userId)
+        public async Task<UserDto> GetUserAsync(string userId)
         {
-            var user = _userDomainService.GetUserById(userId);
+            var user = await _userDomainService.GetUserByIdAsync(userId);
 
             if (user == null)
             {
@@ -38,9 +39,10 @@ namespace ApiAppShop.Application.Services
 
             return _mapper.Map<UserDto>(user);
         }
-        public void SetUser(UserDto user)
+
+        public async Task SetUserAsync(UserDto user)
         {
-            _userDomainService.UpdateUser(_mapper.Map<UserEntity>(user));
+            await _userDomainService.UpdateUserAsync(_mapper.Map<UserEntity>(user));
         }
     }
 }

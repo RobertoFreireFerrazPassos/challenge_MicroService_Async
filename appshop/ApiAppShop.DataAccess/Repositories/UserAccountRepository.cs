@@ -3,6 +3,7 @@ using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
 using ApiAppShop.Repository;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.DataAccess.Repositories
 {
@@ -13,19 +14,19 @@ namespace ApiAppShop.DataAccess.Repositories
         {
         }
 
-        public void Set(UserAccountEntity item)
+        public async Task SetAsync(UserAccountEntity item)
         {
-            SetItem(item);
+            await SetItemAsync(item);
         }
 
-        public void Replace(UserAccountEntity item)
+        public async Task ReplaceAsync(UserAccountEntity item)
         {
-            ReplaceItem(item);
+            await ReplaceItemAsync(item);
         }
 
-        public UserAccountEntity Get(string userId)
+        public async Task<UserAccountEntity> GetAsync(string userId)
         {
-            return GetItemByCustomStringFilter(RepositoryConstants.USERID, userId);
+            return await GetItemByCustomStringFilterAsync(RepositoryConstants.USERID, userId);
         }
     }
 }

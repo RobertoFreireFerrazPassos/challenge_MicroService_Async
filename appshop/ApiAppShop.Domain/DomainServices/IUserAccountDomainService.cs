@@ -1,13 +1,14 @@
 ﻿using ApiAppShop.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.DomainServices
 {
     public interface IUserAccountDomainService
     {
-        public UserAccountEntity Get(string userId);
+        public Task<UserAccountEntity> GetAsync(string userId);
 
-        public void Update(UserAccountEntity userAccount);
+        public Task UpdateAsync(UserAccountEntity userAccount);
 
-        public void Create(UserAccountEntity userAccount);
+        public Task CreateAsync(UserAccountEntity userAccount);
     }
 }

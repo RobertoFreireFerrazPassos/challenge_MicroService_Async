@@ -3,6 +3,7 @@ using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Application.DomainServices
 {
@@ -16,19 +17,19 @@ namespace ApiAppShop.Application.DomainServices
                 throw new ArgumentNullException(nameof(appRepository));
         }
 
-        public void AddApp(AppEntity app)
+        public async Task AddAppAsync(AppEntity app)
         {
-            _appRepository.SetApp(app);
+            await _appRepository.SetAppAsync(app);
         }
 
-        public IEnumerable<AppEntity> GetApps()
+        public async Task<IEnumerable<AppEntity>> GetAppsAsync()
         {
-            return _appRepository.GetApps();
+            return await _appRepository.GetAppsAsync();
         }
 
-        public AppEntity GetApp(string appId)
+        public async Task<AppEntity> GetAppAsync(string appId)
         {
-            return _appRepository.GetApp(appId);
+            return await _appRepository.GetAppAsync(appId);
         }
     }
 }

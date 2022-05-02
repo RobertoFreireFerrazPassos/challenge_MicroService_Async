@@ -8,8 +8,8 @@ namespace ApiAppShop.Domain.Services
     {
         public Task PurchaseAsync(AppPurchaseDto AppPurchase);
 
-        public void AddAppInUserAccount(AppPurchasedDto appPurchased);
+        public Task AddAppInUserAccountAsync(AppPurchasedDto appPurchased);
 
-        public IEnumerable<AppDto> GetAppsByUser(string userId);
+        public Task<IEnumerable<AppDto>> GetAppsByUserAsync(string userId);
     }
 }

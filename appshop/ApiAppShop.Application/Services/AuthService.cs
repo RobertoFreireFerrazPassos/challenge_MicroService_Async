@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Application.Services
 {
@@ -33,10 +34,10 @@ namespace ApiAppShop.Application.Services
                 throw new ArgumentNullException(nameof(configuration));
         }
 
-        public string LogIn(LogInDto logInInfo)
+        public async Task<string> LogInAsync(LogInDto logInInfo)
         {
             var user = _mapper.Map<UserDto>(
-                    _userDomainService.GetUserByName(logInInfo.Name) ??
+                    await _userDomainService.GetUserByNameAsync(logInInfo.Name) ??
                     throw new Exception(ErrorMessageConstants.USER_DOESNT_EXIST)
                 );
 
@@ -57,7 +58,7 @@ namespace ApiAppShop.Application.Services
             return Token.Create(user, key);
         }
 
-        public void CreateNewUser(UserDto user)
+        public async Task CreateNewUserAsync(UserDto user)
         {
             Hash.Create(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -74,7 +75,7 @@ namespace ApiAppShop.Application.Services
                 Address = user.Address
             };
 
-            _userDomainService.CreateNewUser(userEntity);
+            await _userDomainService.CreateNewUserAsync(userEntity);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles
         public PurchaseProfile()
         {
             CreateMap<PurchaseRequest, AppPurchaseDto>();
+
             CreateMap<AppPurchaseDto, AppPurchasedEvent>();            
         }
     }

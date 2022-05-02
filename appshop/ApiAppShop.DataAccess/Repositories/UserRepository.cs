@@ -3,6 +3,7 @@ using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
 using ApiAppShop.Repository;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.DataAccess.Repositories
 {
@@ -12,29 +13,29 @@ namespace ApiAppShop.DataAccess.Repositories
 
         public UserRepository(IConfiguration configuration) : base(configuration, Document) { }
 
-        public UserEntity GetUser(string id)
+        public async Task<UserEntity> GetUserAsync(string id)
         {
-            return GetItem(id);
+            return await GetItemAsync(id);
         }
 
-        public UserEntity GetUserByName(string name)
+        public async Task<UserEntity> GetUserByNameAsync(string name)
         {
-            return GetItemByCustomStringFilter("Name", name);
+            return await GetItemByCustomStringFilterAsync("Name", name);
         }        
 
-        public void SetUser(UserEntity item)
+        public async Task SetUserAsync(UserEntity item)
         {
-            SetItem(item);
+            await SetItemAsync(item);
         }
 
-        public void UpdateUser(string userId, string field, object value)
+        public async Task UpdateUserAsync(string userId, string field, object value)
         {
-            UpdateItem(userId, field, value);
+            await UpdateItemAsync(userId, field, value);
         }
 
-        public void ReplaceUser(UserEntity item)
+        public async Task ReplaceUserAsync(UserEntity item)
         {
-            ReplaceItem(item);
+            await ReplaceItemAsync(item);
         }
     }
 }

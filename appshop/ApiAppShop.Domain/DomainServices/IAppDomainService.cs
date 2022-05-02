@@ -1,15 +1,15 @@
-﻿using ApiAppShop.Domain.Dtos;
-using ApiAppShop.Domain.Entities;
+﻿using ApiAppShop.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.DomainServices
 {
     public interface IAppDomainService
     {
-        public void AddApp(AppEntity app);
+        public Task AddAppAsync(AppEntity app);
 
-        public IEnumerable<AppEntity> GetApps();
+        public Task<IEnumerable<AppEntity>> GetAppsAsync();
 
-        public AppEntity GetApp(string appId);
+        public Task<AppEntity> GetAppAsync(string appId);
     }
 }

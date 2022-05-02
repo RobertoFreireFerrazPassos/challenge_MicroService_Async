@@ -17,7 +17,7 @@ namespace ApiAppShop.Domain.Consumers
             _purchaseService = purchaseService;
         }
 
-        public Task Consume(ConsumeContext<AppPurchasedStatusConfirmationEvent> context)
+        public async Task Consume(ConsumeContext<AppPurchasedStatusConfirmationEvent> context)
         {
             string message;
 
@@ -30,7 +30,7 @@ namespace ApiAppShop.Domain.Consumers
                     AppId = context.Message.AppId
                 };
 
-                _purchaseService.AddAppInUserAccount(newApp);
+                await _purchaseService.AddAppInUserAccountAsync(newApp);
             }
             else
             {
@@ -38,7 +38,6 @@ namespace ApiAppShop.Domain.Consumers
             }                
             
             Console.WriteLine(message);
-            return Task.CompletedTask;
         }
     }
 }

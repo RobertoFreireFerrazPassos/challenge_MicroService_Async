@@ -4,6 +4,7 @@ using ApiAppShop.Domain.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Controllers
 {
@@ -24,11 +25,11 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpPost("SignIn")]
-        public IActionResult SignIn(SignInRequest signInRequest)
+        public async Task<IActionResult> SignInAsync(SignInRequest signInRequest)
         {
             try
             {
-                _authService.CreateNewUser(_mapper.Map<UserDto>(signInRequest));
+                await _authService.CreateNewUserAsync(_mapper.Map<UserDto>(signInRequest));
 
                 return Ok();
             }
@@ -39,11 +40,11 @@ namespace ApiAppShop.Controllers
         }
 
         [HttpPost("LogIn")]
-        public IActionResult LogIn(LogInRequest signInRequest)
+        public async Task<IActionResult> LogInAsync(LogInRequest signInRequest)
         {
             try
             {
-                return Ok(_authService.LogIn(_mapper.Map<LogInDto>(signInRequest)));
+                return Ok(await _authService.LogInAsync(_mapper.Map<LogInDto>(signInRequest)));
             }
             catch (Exception ex)
             {

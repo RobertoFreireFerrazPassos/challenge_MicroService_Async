@@ -1,11 +1,12 @@
 ﻿using ApiAppShop.Domain.Dtos.User;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.Services
 {
     public interface IAuthService
     {
-        public string LogIn(LogInDto logInInfo);
+        public Task<string> LogInAsync(LogInDto logInInfo);
 
-        public void CreateNewUser(UserDto user);
+        public Task CreateNewUserAsync(UserDto user);
     }
 }

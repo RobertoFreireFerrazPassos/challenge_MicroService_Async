@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Application.DomainServices
 {
@@ -30,13 +31,13 @@ namespace ApiAppShop.Application.DomainServices
                 throw new ArgumentNullException(nameof(cache));
         }
 
-        public UserAccountEntity Get(string userId)
+        public async Task<UserAccountEntity> GetAsync(string userId)
         {
             var userAccount = GetUserAccountInCache(userId);            
 
             if ((userAccount is null) || userAccount.Apps.ToList().Count == 0)
             {
-                userAccount = _userAccountRepository.Get(userId);
+                userAccount = await _userAccountRepository.GetAsync(userId);
             }
 
             return userAccount;
@@ -58,16 +59,16 @@ namespace ApiAppShop.Application.DomainServices
             }
         }
 
-        public void Update(UserAccountEntity userAccount)
+        public async Task UpdateAsync(UserAccountEntity userAccount)
         {
-            _userAccountRepository.Replace(userAccount);
+            await _userAccountRepository.ReplaceAsync(userAccount);
 
             SetUserAccountInCache(userAccount);
         }
 
-        public void Create(UserAccountEntity userAccount)
+        public async Task CreateAsync(UserAccountEntity userAccount)
         {
-            _userAccountRepository.Set(userAccount);
+            await _userAccountRepository.SetAsync(userAccount);
 
             SetUserAccountInCache(userAccount);
         }

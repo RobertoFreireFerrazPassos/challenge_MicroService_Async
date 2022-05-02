@@ -1,10 +1,11 @@
 ﻿using ApiAppShop.Domain.Dtos.User;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.Services
 {
     public interface IUserService
     {
-        public UserDto GetUser(string userId);
-        public void SetUser(UserDto user);
+        public Task<UserDto> GetUserAsync(string userId);
+        public Task SetUserAsync(UserDto user);
     }
 }

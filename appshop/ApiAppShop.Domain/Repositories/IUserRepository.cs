@@ -1,13 +1,14 @@
 ﻿using ApiAppShop.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace ApiAppShop.Domain.Repositories
 {
     public interface IUserRepository
     {
-        public UserEntity GetUser(string id);
-        public UserEntity GetUserByName(string name);
-        public void SetUser(UserEntity item);
-        public void UpdateUser(string userId, string field, object value);
-        public void ReplaceUser(UserEntity item);
+        public Task<UserEntity> GetUserAsync(string id);
+        public Task<UserEntity> GetUserByNameAsync(string name);
+        public Task SetUserAsync(UserEntity item);
+        public Task UpdateUserAsync(string userId, string field, object value);
+        public Task ReplaceUserAsync(UserEntity item);
     }
 }
