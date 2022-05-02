@@ -23,19 +23,6 @@ namespace ApiAppShop.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet("LogOff")]
-        public IActionResult LogOff()
-        {
-            try
-            {
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpPost("SignIn")]
         public IActionResult SignIn(SignInRequest signInRequest)
         {

@@ -18,13 +18,11 @@
 
 3 - Create Credit Card Validation 
 
-4 - Create Authorization with token
+4 - Add log messages structure 
 
-5 - Add log messages structure 
+5 - Change Services and Repositories Methods to Async
 
-6 - Change Services and Repositories Methods to Async
-
-7 - Handling Failures
+6 - Handling Failures
 
 Failures cases:
 
@@ -32,9 +30,9 @@ Failures cases:
 
 --> between Credit Card Processor and RabbitMq
 
-Strategies: [1] Strategies to handle partial failure
+Reference: [1] Strategies to handle partial failure
 
-8 - Test all cases of problems using Cache
+7 - Test all cases of problems using Cache
 
 
 ## Notes
