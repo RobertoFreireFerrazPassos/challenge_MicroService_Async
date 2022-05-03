@@ -9,11 +9,23 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/set",
+      "UpstreamPathTemplate": "/addapp",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/App/getapps",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiappshop",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/getapps",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/App/getapp/{id}",
+      "DownstreamPathTemplate": "/App/getappsbyuser/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -34,6 +46,30 @@
         }
       ],
       "UpstreamPathTemplate": "/purchase",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/Auth/SignIn",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiappshop",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/signin",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/Auth/LogIn",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "apiappshop",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/login",
       "UpstreamHttpMethod": [ "Post" ]
     }
   ],
