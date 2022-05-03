@@ -14,9 +14,7 @@
 
 1 - Create more tests with mocks
 
-2 - For update or insert in Cache and Database, add roll back logic if either one fails
-
-3 - Add Fluent validation
+2 - Add Fluent validation
 
 ## Notes
 

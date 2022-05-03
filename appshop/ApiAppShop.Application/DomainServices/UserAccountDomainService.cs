@@ -3,7 +3,7 @@ using ApiAppShop.Domain.Constants;
 using ApiAppShop.Domain.DomainServices;
 using ApiAppShop.Domain.Entities;
 using ApiAppShop.Domain.Repositories;
-using AutoMapper;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +20,20 @@ namespace ApiAppShop.Application.DomainServices
 
         private readonly string _appbyuser = CacheKeyPrefixConstants.APP_BY_USER_;
 
+        private readonly  ILogger<UserAccountDomainService> _logger;
+
         public UserAccountDomainService(
             IUserAccountRepository userAccountRepository,
-            ICache cache
+            ICache cache,
+            ILogger<UserAccountDomainService> logger
             ) 
         {
             _userAccountRepository = userAccountRepository ??
                 throw new ArgumentNullException(nameof(userAccountRepository));
             _cache = cache ??
                 throw new ArgumentNullException(nameof(cache));
+            _logger = logger ??
+                throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<UserAccountEntity> GetAsync(string userId)
@@ -61,16 +66,46 @@ namespace ApiAppShop.Application.DomainServices
 
         public async Task UpdateAsync(UserAccountEntity userAccount)
         {
-            await _userAccountRepository.ReplaceAsync(userAccount);
+            var userAccountBackUp = GetUserAccountInCache(userAccount.UserId);
 
-            SetUserAccountInCache(userAccount);
+            try
+            {
+                SetUserAccountInCache(userAccount);
+
+                await _userAccountRepository.ReplaceAsync(userAccount);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                _logger.LogInformation(
+                    string.Format(ErrorMessageConstants.ROLLING_BACK_CHANGES_FOR_USER_ACCOUNT_0_IN_CACHE, userAccount.UserId)
+                    ); 
+
+                SetUserAccountInCache(userAccountBackUp);
+            }            
         }
 
         public async Task CreateAsync(UserAccountEntity userAccount)
         {
-            await _userAccountRepository.SetAsync(userAccount);
+            var userAccountBackUp = GetUserAccountInCache(userAccount.UserId);
 
-            SetUserAccountInCache(userAccount);
+            try
+            {
+                SetUserAccountInCache(userAccount);
+
+                await _userAccountRepository.SetAsync(userAccount);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                _logger.LogInformation(
+                    string.Format(ErrorMessageConstants.ROLLING_BACK_CHANGES_FOR_USER_ACCOUNT_0_IN_CACHE, userAccount.UserId)
+                    );
+
+                SetUserAccountInCache(userAccountBackUp);
+            }
         }
 
         private void SetUserAccountInCache(UserAccountEntity userAccount)
@@ -78,6 +113,22 @@ namespace ApiAppShop.Application.DomainServices
             string value = JsonSerializer.Serialize(userAccount.Apps);
 
             _cache.Set(BuildKey(userAccount.UserId), value);
+        }
+
+        private UserAccountEntity GetUserAccountInCache(string userId)
+        {
+            var result = _cache.Get(BuildKey(userId));
+
+            if (result == null)
+            {
+                return default(UserAccountEntity);
+            }
+
+            return new UserAccountEntity()
+            {
+                UserId = userId,
+                Apps = JsonSerializer.Deserialize<IEnumerable<AppEntity>>(result)
+            };
         }
 
         private string BuildKey(string key)

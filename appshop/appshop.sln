@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{DC6A2DDE-98BF-4D16-B73F-432FA1E5AAF9}"
 EndProject
@@ -39,7 +39,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleCreditCardProcessor.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleCreditCardProcessor.Tests", "ConsoleCreditCardProcessor.Tests\ConsoleCreditCardProcessor.Tests.csproj", "{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.Cache", "ApiAppShop.Cache\ApiAppShop.Cache.csproj", "{00A04DE2-21B4-41C5-94E0-E0DDB66139C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAppShop.Cache", "ApiAppShop.Cache\ApiAppShop.Cache.csproj", "{00A04DE2-21B4-41C5-94E0-E0DDB66139C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAppShop.Log", "ApiAppShop.Log\ApiAppShop.Log.csproj", "{A51A01B2-FDB6-4022-9C7D-A81E3EEDFEE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{00A04DE2-21B4-41C5-94E0-E0DDB66139C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00A04DE2-21B4-41C5-94E0-E0DDB66139C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00A04DE2-21B4-41C5-94E0-E0DDB66139C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51A01B2-FDB6-4022-9C7D-A81E3EEDFEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51A01B2-FDB6-4022-9C7D-A81E3EEDFEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51A01B2-FDB6-4022-9C7D-A81E3EEDFEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51A01B2-FDB6-4022-9C7D-A81E3EEDFEE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +116,7 @@ Global
 		{6DA6FF22-BD9D-47AC-81F9-8806643A7CB5} = {8557514C-8111-4EA6-AAF3-BB468DF57D6C}
 		{BBE7FD75-75B7-4313-8C71-1C02FBF1B14F} = {6DA6FF22-BD9D-47AC-81F9-8806643A7CB5}
 		{00A04DE2-21B4-41C5-94E0-E0DDB66139C4} = {AABFE64E-35DB-4B8A-9166-89C7CF934243}
+		{A51A01B2-FDB6-4022-9C7D-A81E3EEDFEE4} = {AABFE64E-35DB-4B8A-9166-89C7CF934243}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF31D2E9-8B19-483B-B98A-8DF03697422F}

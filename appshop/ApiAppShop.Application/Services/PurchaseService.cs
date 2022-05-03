@@ -85,7 +85,7 @@ namespace ApiAppShop.Application.Services
                 return;
             }
 
-            if (userAccount.Apps.Where(a => a.Id == newPurchaseApp.Id) is not null)
+            if (userAccount.Apps.Where(a => a.Id == newPurchaseApp.Id).Count() != 0)
             {
                 return;
             }
