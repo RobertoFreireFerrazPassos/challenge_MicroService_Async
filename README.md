@@ -20,18 +20,17 @@
 
 ## Notes
 
-RabbitMQ
-http://localhost:15672/
-username and password: guest / guest
+Run docker compose either by visual studio or by command line
 
-In docker containers such as ApiAppShop.Presentation, it is possible to see the console messages
+In order to run docker compose on visual studio, set docker-compose as start up project
+
+To import collection to Postman, there is  a file "challenge_MicroService_Async.postman_collection.json" with all gateway requests
+
+To test with swagger: http://localhost:9002/swagger/index.html
+
+To access RabbitMQ: http://localhost:15672/ username and password: guest / guest
 
 ## Steps to complete test using swagger 
-
-Run docker compose either by visual studio or by command line
-In order to run docker compose on visual studio, set docker-compose as start up project
-To import collection to Postman, there is  a file "challenge_MicroService_Async.postman_collection.json" with all gateway requests
-to test with swagger: (http://localhost:9002/swagger/index.html)
 
 1 - Create user
 
