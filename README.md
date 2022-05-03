@@ -14,8 +14,6 @@
 
 1 - Create more tests with mocks
 
-2 - Add Fluent validation
-
 ## Notes
 
 Run docker compose either by visual studio or by command line
