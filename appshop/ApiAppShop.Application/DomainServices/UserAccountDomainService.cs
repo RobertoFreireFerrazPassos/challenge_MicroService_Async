@@ -40,34 +40,16 @@ namespace ApiAppShop.Application.DomainServices
         {
             var userAccount = GetUserAccountInCache(userId);            
 
-            if ((userAccount is null) || userAccount.Apps.ToList().Count == 0)
+            if (userAccount is null)
             {
                 userAccount = await _userAccountRepository.GetAsync(userId);
             }
 
             return userAccount;
-
-            UserAccountEntity GetUserAccountInCache(string userId)
-            {
-                var result = _cache.Get(BuildKey(userId));
-
-                if (result == null)
-                {
-                    return default(UserAccountEntity);
-                }
-
-                return new UserAccountEntity()
-                {
-                    UserId = userId,
-                    Apps = JsonSerializer.Deserialize<IEnumerable<AppEntity>>(result)
-                };
-            }
         }
 
-        public async Task UpdateAsync(UserAccountEntity userAccount)
+        public async Task UpdateAsync(UserAccountEntity userAccount, UserAccountEntity userAccountBackUp = null)
         {
-            var userAccountBackUp = GetUserAccountInCache(userAccount.UserId);
-
             try
             {
                 SetUserAccountInCache(userAccount);
@@ -88,7 +70,11 @@ namespace ApiAppShop.Application.DomainServices
 
         public async Task CreateAsync(UserAccountEntity userAccount)
         {
-            var userAccountBackUp = GetUserAccountInCache(userAccount.UserId);
+            var userAccountBackUp = new UserAccountEntity()
+            {
+                UserId = userAccount.UserId,
+                Apps = new List<AppEntity>() { }
+            };
 
             try
             {

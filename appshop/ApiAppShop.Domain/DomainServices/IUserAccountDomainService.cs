@@ -7,7 +7,7 @@ namespace ApiAppShop.Domain.DomainServices
     {
         public Task<UserAccountEntity> GetAsync(string userId);
 
-        public Task UpdateAsync(UserAccountEntity userAccount);
+        public Task UpdateAsync(UserAccountEntity userAccount, UserAccountEntity oldUserAccount);
 
         public Task CreateAsync(UserAccountEntity userAccount);
     }

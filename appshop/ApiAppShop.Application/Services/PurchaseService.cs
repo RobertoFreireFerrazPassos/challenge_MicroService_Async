@@ -105,13 +105,20 @@ namespace ApiAppShop.Application.Services
 
             async Task UpdateUserAccountAsync(UserAccountEntity userAccount, AppDto newPurchaseApp)
             {
+                var oldUserAccount = new UserAccountEntity()
+                {
+                    Id = userAccount.Id,
+                    UserId = userAccount.UserId,
+                    Apps = userAccount.Apps.ToList()
+                };
+
                 var apps = userAccount.Apps.ToList();
 
                 apps.Add(_mapper.Map<AppEntity>(newPurchaseApp));
 
                 userAccount.Apps = apps;
 
-                await _userAccountDomainService.UpdateAsync(userAccount);
+                await _userAccountDomainService.UpdateAsync(userAccount, oldUserAccount);
             }
         }
     }
