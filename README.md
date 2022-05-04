@@ -9,11 +9,6 @@
   <img src="https://github.com/RobertoFreireFerrazPassos/challenge_MicroService_Async/blob/master/appshop/modelagem.png?raw=true">
 </p>
 
-
-## Pending/next steps:
-
-1 - Create more tests with mocks
-
 ## Notes
 
 Run docker compose either by visual studio or by command line
