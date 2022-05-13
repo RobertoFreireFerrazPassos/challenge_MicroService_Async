@@ -16,18 +16,26 @@ namespace ApiAppShop.Controllers
     [Route("[controller]")]
     public class AppController : ControllerBase
     {
-        private IAppService _appService;
-        private IPurchaseService _purchaseService;
+        private readonly IAppService _appService;
+
+        private readonly IPurchaseService _purchaseService;
+
+        private readonly IUserAccountService _userAccountService;
+
         private readonly IMapper _mapper;
 
-        public AppController(IAppService appService,
+        public AppController(
+            IAppService appService,
             IPurchaseService purchaseService,
+            IUserAccountService userAccountService,
             IMapper mapper)
         {
             _appService = appService ??
                 throw new ArgumentNullException(nameof(appService));
             _purchaseService = purchaseService ??
                 throw new ArgumentNullException(nameof(purchaseService));
+            _userAccountService = userAccountService ??
+                throw new ArgumentNullException(nameof(userAccountService));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
         }
@@ -70,7 +78,7 @@ namespace ApiAppShop.Controllers
         {
             try
             {
-                var apps = await _purchaseService.GetAppsByUserAsync(userid);                
+                var apps = await _userAccountService.GetAppsByUserAsync(userid);                
 
                 var response = new AppResponse()
                 {

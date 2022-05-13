@@ -10,11 +10,11 @@ namespace ApiAppShop.Domain.Consumers
 {
     public class AppPurchasedStatusConfirmationConsumer : IConsumer<AppPurchasedStatusConfirmationEvent>
     {
-        private readonly IPurchaseService _purchaseService;
+        private readonly IUserAccountService _userAccountService;
 
-        public AppPurchasedStatusConfirmationConsumer(IPurchaseService purchaseService) 
+        public AppPurchasedStatusConfirmationConsumer(IUserAccountService userAccountService) 
         {
-            _purchaseService = purchaseService;
+            _userAccountService = userAccountService;
         }
 
         public async Task Consume(ConsumeContext<AppPurchasedStatusConfirmationEvent> context)
@@ -30,7 +30,7 @@ namespace ApiAppShop.Domain.Consumers
                     AppId = context.Message.AppId
                 };
 
-                await _purchaseService.AddAppInUserAccountAsync(newApp);
+                await _userAccountService.AddAppInUserAccountAsync(newApp);
             }
             else
             {

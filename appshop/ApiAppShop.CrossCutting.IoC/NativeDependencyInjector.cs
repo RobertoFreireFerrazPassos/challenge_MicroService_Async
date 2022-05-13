@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ApiAppShop.Cache;
 using ApiAppShop.Domain.DomainServices;
 using ApiAppShop.Application.DomainServices;
+using ApiAppShop.Domain.Factories;
+using ApiAppShop.Application.Factories;
 
 namespace ApiAppShop.CrossCutting.IoC
 {
