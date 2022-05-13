@@ -24,11 +24,14 @@ namespace ApiAppShop.Application.Services
 
         private readonly IMapper _mapper;
 
+        private readonly IUserAccountEventHandlerFactory _userEventHandlerFactory;
+
         public PurchaseService(IAppService appService, 
             IAppPurchasedProducer appPurchasedProducer,
             IUserService userService,
             IUserAccountDomainService userAccountDomainService,
-            IMapper mapper) 
+            IMapper mapper,
+            IUserAccountEventHandlerFactory userEventHandlerFactory) 
         {
             _userService = userService ??
                 throw new ArgumentNullException(nameof(userService));
@@ -40,6 +43,8 @@ namespace ApiAppShop.Application.Services
                 throw new ArgumentNullException(nameof(userAccountDomainService));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+            _userEventHandlerFactory = userEventHandlerFactory ??
+                throw new ArgumentNullException(nameof(userEventHandlerFactory));
         }
 
         public async Task PurchaseAsync(AppPurchaseDto appPurchase) {
@@ -79,47 +84,157 @@ namespace ApiAppShop.Application.Services
 
             var userAccount = await _userAccountDomainService.GetAsync(appPurchased.UserId);
 
-            if (userAccount is null)
+            var userEventHandler = _userEventHandlerFactory.Create(
+                    new UserAccountEventHandlerFactoryParams() { 
+                        UserAccount = userAccount,
+                        UserId = appPurchased.UserId,
+                        NewPurchaseApp = newPurchaseApp
+                    }
+                );
+
+            await userEventHandler.Run();
+        }
+    }
+
+    public interface IUserEventHandler
+    {
+        public Task Run();
+    }
+
+    public class CreateUserEventHandler : IUserEventHandler
+    {
+        private readonly IUserAccountDomainService _userAccountDomainService;
+
+        private readonly string _userId;
+
+        private readonly AppDto _newPurchaseApp;
+
+        private readonly IMapper _mapper;
+
+        public CreateUserEventHandler(
+            IMapper mapper,
+            IUserAccountDomainService userAccountDomainService, 
+            string userId, 
+            AppDto newPurchaseApp)
+        {
+            _mapper = mapper;
+
+            _userAccountDomainService = userAccountDomainService;
+
+            _userId = userId;
+
+            _newPurchaseApp = newPurchaseApp;
+        }
+
+        public async Task Run()
+        {
+            var userAccount = new UserAccountEntity()
             {
-                await CreateNewUserAccountAsync(appPurchased.UserId, newPurchaseApp);
-                return;
-            }
+                UserId = _userId,
+                Apps = new List<AppEntity>() { _mapper.Map<AppEntity>(_newPurchaseApp) }
+            };
 
-            if (userAccount.Apps.Where(a => a.Id == newPurchaseApp.Id).Count() != 0)
+            await _userAccountDomainService.CreateAsync(userAccount);
+        }
+    }
+
+    public class UpdateUserEventHandler : IUserEventHandler
+    {
+        private readonly IMapper _mapper;
+
+        private readonly IUserAccountDomainService _userAccountDomainService;
+
+        private readonly UserAccountEntity _userAccount;
+
+        private readonly AppDto _newPurchaseApp;
+
+        public UpdateUserEventHandler(
+            IMapper mapper,
+            IUserAccountDomainService userAccountDomainService,
+            UserAccountEntity userAccount, 
+            AppDto newPurchaseApp)
+        {
+            _mapper = mapper;
+
+            _userAccountDomainService = userAccountDomainService;
+
+            _userAccount = userAccount;
+
+            _newPurchaseApp = newPurchaseApp;
+        }
+
+        public async Task Run()
+        {
+            var oldUserAccount = new UserAccountEntity()
             {
-                return;
-            }
+                Id = _userAccount.Id,
+                UserId = _userAccount.UserId,
+                Apps = _userAccount.Apps.ToList()
+            };
 
-            await UpdateUserAccountAsync(userAccount, newPurchaseApp);
+            var apps = _userAccount.Apps.ToList();
 
-            async Task CreateNewUserAccountAsync(string userId, AppDto newPurchaseApp)
+            apps.Add(_mapper.Map<AppEntity>(_newPurchaseApp));
+
+            _userAccount.Apps = apps;
+
+            await _userAccountDomainService.UpdateAsync(_userAccount, oldUserAccount);
+        }
+    }
+
+    public class NullUserEventHandler : IUserEventHandler
+    {
+        public async Task Run()
+        {
+            await Task.CompletedTask;
+        }
+    }
+
+    public class UserAccountEventHandlerFactoryParams
+    {
+        public UserAccountEntity UserAccount;
+
+        public AppDto NewPurchaseApp;
+
+        public string UserId;
+    }
+
+    public interface IUserAccountEventHandlerFactory
+    {
+        public IUserEventHandler Create(UserAccountEventHandlerFactoryParams parameters);
+    }
+
+    public class UserAccountEventHandlerFactory : IUserAccountEventHandlerFactory
+    {
+        private readonly IServiceProvider _provider;
+
+        public UserAccountEventHandlerFactory(IServiceProvider provider)
+        {
+            _provider = provider;
+        }
+
+        public IUserEventHandler Create(UserAccountEventHandlerFactoryParams parameters) 
+        {
+            if (parameters.UserAccount is null)
             {
-                userAccount = new UserAccountEntity()
-                {
-                    UserId = userId,
-                    Apps = new List<AppEntity>() { _mapper.Map<AppEntity>(newPurchaseApp) }
-                };
-
-                await _userAccountDomainService.CreateAsync(userAccount);
-            }
-
-            async Task UpdateUserAccountAsync(UserAccountEntity userAccount, AppDto newPurchaseApp)
+                return new CreateUserEventHandler(
+                        (IMapper) _provider.GetService(typeof(IMapper)),
+                        (IUserAccountDomainService) _provider.GetService(typeof(IUserAccountDomainService)),
+                        parameters.UserId,
+                        parameters.NewPurchaseApp
+                    );
+            } 
+            else if (parameters.UserAccount.Apps.Where(a => a.Id == parameters.NewPurchaseApp.Id).Count() != 0)
             {
-                var oldUserAccount = new UserAccountEntity()
-                {
-                    Id = userAccount.Id,
-                    UserId = userAccount.UserId,
-                    Apps = userAccount.Apps.ToList()
-                };
+                return new NullUserEventHandler();
+            }                       
 
-                var apps = userAccount.Apps.ToList();
-
-                apps.Add(_mapper.Map<AppEntity>(newPurchaseApp));
-
-                userAccount.Apps = apps;
-
-                await _userAccountDomainService.UpdateAsync(userAccount, oldUserAccount);
-            }
+            return new UpdateUserEventHandler(
+                    (IMapper) _provider.GetService(typeof(IMapper)),
+                    (IUserAccountDomainService) _provider.GetService(typeof(IUserAccountDomainService)),
+                    parameters.UserAccount,
+                    parameters.NewPurchaseApp
+                );
         }
     }
 }
