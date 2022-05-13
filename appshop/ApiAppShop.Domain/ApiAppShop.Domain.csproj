@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Events\Consumers\" />
+    <Compile Remove="Events\Consumers\**" />
+    <EmbeddedResource Remove="Events\Consumers\**" />
+    <None Remove="Events\Consumers\**" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,13 @@ namespace ApiAppShop.CrossCutting.IoC
 			services.AddScoped<IPurchaseService,PurchaseService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IAuthService, AuthService>();
+			services.AddScoped<IUserAccountService, UserAccountService>();
+			#endregion
+
+			#region Factories 
+
 			services.AddScoped<IUserAccountEventHandlerFactory, UserAccountEventHandlerFactory>();
+
 			#endregion
 
 			#region DomainServices    
