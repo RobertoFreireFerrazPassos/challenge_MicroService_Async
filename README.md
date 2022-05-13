@@ -9,6 +9,10 @@
   <img src="https://github.com/RobertoFreireFerrazPassos/challenge_MicroService_Async/blob/master/appshop/modelagem.png?raw=true">
 </p>
 
+## Pending
+
+**Create tests for cache while updating or creating user account**
+
 ## Notes
 
 Run docker compose either by visual studio or by command line

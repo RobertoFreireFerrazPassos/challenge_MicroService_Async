@@ -59,11 +59,11 @@ namespace ApiAppShop.Application.DomainServices
             {
                 _logger.LogError(ex.Message);
 
-                _logger.LogInformation(
-                    string.Format(ErrorMessageConstants.ROLLING_BACK_CHANGES_FOR_USER_ACCOUNT_0_IN_CACHE, userAccount.UserId)
-                    ); 
-
                 SetUserAccountInCache(userAccountBackUp);
+
+                _logger.LogInformation(
+                    string.Format(ErrorMessageConstants.ROLLED_BACK_USER_ACCOUNT_0_IN_CACHE, userAccount.UserId)
+                    );
             }            
         }
 
@@ -85,11 +85,11 @@ namespace ApiAppShop.Application.DomainServices
             {
                 _logger.LogError(ex.Message);
 
-                _logger.LogInformation(
-                    string.Format(ErrorMessageConstants.ROLLING_BACK_CHANGES_FOR_USER_ACCOUNT_0_IN_CACHE, userAccount.UserId)
-                    );
-
                 SetUserAccountInCache(userAccountBackUp);
+
+                _logger.LogInformation(
+                    string.Format(ErrorMessageConstants.ROLLED_BACK_USER_ACCOUNT_0_IN_CACHE, userAccount.UserId)
+                    );
             }
         }
 
