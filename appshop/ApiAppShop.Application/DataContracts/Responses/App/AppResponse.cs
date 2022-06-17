@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ApiUser.Application.DataContracts
+namespace ApiAppShop.Application.DataContracts
 {
     public class AppResponse
     {

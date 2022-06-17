@@ -2,7 +2,7 @@
 using ApiAppShop.Domain.Constants;
 using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Services;
-using ApiUser.Application.DataContracts;
+using ApiAppShop.Application.DataContracts;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

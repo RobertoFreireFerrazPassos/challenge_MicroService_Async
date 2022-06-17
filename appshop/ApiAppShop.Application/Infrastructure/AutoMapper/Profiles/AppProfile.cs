@@ -1,9 +1,8 @@
 ﻿using ApiAppShop.Application.DataContracts.Requests.App;
 using ApiAppShop.Domain.Dtos;
 using ApiAppShop.Domain.Entities;
-using ApiUser.Application.DataContracts;
+using ApiAppShop.Application.DataContracts;
 using AutoMapper;
-using System.Collections.Generic;
 
 namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles
 {

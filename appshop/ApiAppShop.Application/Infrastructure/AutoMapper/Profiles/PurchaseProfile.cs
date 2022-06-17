@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ApiAppShop.Domain.Dtos;
-using ApiUser.Application.DataContracts;
+using ApiAppShop.Application.DataContracts;
 using ApiAppShop.Domain.Events;
 
 namespace ApiAppShop.Application.Infrastructure.AutoMapper.Profiles

@@ -1,6 +1,6 @@
 ﻿using ApiAppShop.Domain.ValueObjects;
 
-namespace ApiUser.Application.DataContracts
+namespace ApiAppShop.Application.DataContracts
 {
     public class PurchaseRequest
     {

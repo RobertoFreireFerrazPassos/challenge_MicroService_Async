@@ -1,16 +1,14 @@
-﻿namespace ApiAppShop
-{
-    using CreditCardProcessor.Events.Infrastructure;
-    using CreditCardProcessor.Infrastructure;
-    using MassTransit;
-    using MassTransit.RabbitMqTransport;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using System;
-    using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
+﻿using CreditCardProcessor.Events.Infrastructure;
+using CreditCardProcessor.Infrastructure;
+using MassTransit;
+using MassTransit.RabbitMqTransport;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
+namespace ApiAppShop
+{
     class Program
     {
         public static async Task Main()
