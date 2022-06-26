@@ -23,7 +23,7 @@ To access RabbitMQ: http://localhost:15672/ username and password: guest / guest
 
 ## Steps to complete test using swagger 
 
-1 - Create user
+**1 - Create user**
 
 Endpoint ​/Auth​/SignIn
 
@@ -41,7 +41,7 @@ Endpoint ​/Auth​/SignIn
 
 To see user created in database, see topic Access Mongodb Container data.
 
-2 - Test user created and add token to SwaggerUI
+**2 - Test user created and add token to SwaggerUI**
 
 Endpoint /Auth/LogIn
 
@@ -55,7 +55,7 @@ Endpoint /Auth/LogIn
 Copy Token from response and in Authorize button for SwaggerUI paste bearer + token
 From now on, all request that need authorization will have the bearer header authorization
 
-3 - Create App
+**3 - Create App**
 
 Endpoint /App/setapp
 
@@ -66,14 +66,14 @@ Endpoint /App/setapp
 }
 ```
 
-4 - Test app created and get id of app created
+**4 - Test app created and get id of app created**
 
 Endpoint /App/getapps
 
 ex: appid = "id": "f19ddaba-e0a5-45fc-9b5b-a2dd99fa600b",
 
 
-5 - Buy App
+**5 - Buy App**
 
 Endpoint /App/purchase
 
@@ -91,19 +91,20 @@ Endpoint /App/purchase
 }
 ```
 
-6 - Test App bought
+**6 - Test App bought**
 
 Endpoint /App/getappsbyuser/{userid}
 
-7 - Redo test 2 (Test user created)
+**7 - Redo test 2 (Test user created)**
 
 it must have the creditcard new information provided during app purchase
 
+
 ## Access Mongodb Container data
 
-1 - Using docker interface, access Mongodb Container
+**1 - Using docker UI interface, access Mongodb Container**
 
-2 - In command prompt, use commands:
+**2 - In command prompt, use commands:**
 
 mongo
 
@@ -116,7 +117,7 @@ db.getCollectionNames()
 db.Users.find()
 
 
-3 - Get _id 
+**3 - Get _id**
 
 ex:
 
