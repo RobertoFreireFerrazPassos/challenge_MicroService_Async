@@ -116,9 +116,20 @@ db.getCollectionNames()
 
 db.Users.find()
 
-
-**3 - Get _id**
-
-ex:
-
-{ "_id" : "58f3d12e-6886-495e-81e6-232fa4648d30", "Name" : "Alberto Junior", "Cpf" : "", "Role" : 1, "PasswordHash" : BinData(0,"llRJDdobMjUt56hUa5JImH0j3AtTDotZO9aT0nZyRATiFqlidQT4suu9bQvHxvQ76C4tbgkmENBXVFAewEgUAg=="), "PasswordSalt" : BinData(0,"c/tWoB2ndiMqx5Nx7fJRtV+9k6GXVhqmdhzisvJhg0K3RpzVpTL6U7vHS1llhcj7u4iNVX+yrM7HF/teiksVSoMYnlpDW2CFi3kGn1J1tGkGZ92nvKUnKk8gZ532h+ypkz9y0/X1ryxAXJ+QRTy9iLJ3TdYIHFxkldKegdy9mws="), "BirthDate" : ISODate("1993-12-25T17:44:35.665Z"), "Gender" : 2, "CreditCard" : null, "Address" : null }
+``` json
+//It will return a result like below:
+{
+    "_id": "58f3d12e-6886-495e-81e6-232fa4648d30",
+    "Name": "Alberto Junior",
+    "Cpf": "",
+    "Role": 1,
+    "PasswordHash": BinData(0,
+    "llRJDdobMjUt56hUa5JImH0j3AtTDotZO9aT0nZyRATiFqlidQT4suu9bQvHxvQ76C4tbgkmENBXVFAewEgUAg=="),
+    "PasswordSalt": BinData(0,
+    "c/tWoB2ndiMqx5Nx7fJRtV+9k6GXVhqmdhzisvJhg0K3RpzVpTL6U7vHS1llhcj7u4iNVX+yrM7HF/teiksVSoMYnlpDW2CFi3kGn1J1tGkGZ92nvKUnKk8gZ532h+ypkz9y0/X1ryxAXJ+QRTy9iLJ3TdYIHFxkldKegdy9mws="),
+    "BirthDate": ISODate("1993-12-25T17:44:35.665Z"),
+    "Gender": 2,
+    "CreditCard": null,
+    "Address": null
+}
+```
