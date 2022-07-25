@@ -116,7 +116,7 @@ db.getCollectionNames()
 
 db.Users.find()
 
-``` json
+```
 //It will return a result like below:
 {
     "_id": "58f3d12e-6886-495e-81e6-232fa4648d30",
